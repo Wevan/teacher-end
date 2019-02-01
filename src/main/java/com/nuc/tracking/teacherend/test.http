@@ -1,0 +1,56 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+POST http://localhost:8082/course/insert
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTE0MDEwMzExIiwidXNlcklkIjoxNTU2LCJpYXQiOjE1NDgzMjA0ODEsImV4cCI6MTU0ODkyNTI4MX0.tQCS-qHlAOiboYEXTiE4rON3YmrNU9ExJcFYKpakHkU
+
+{
+  "about": "这是2个测试",
+  "classHour": "25",
+  "coverImage": "test2.png",
+  "direction": "A",
+  "id": 0,
+  "level": "3",
+  "name": "测试基础2",
+  "num": "",
+  "requirement": "",
+  "score": "4"
+}
+
+###
+
+POST http://localhost:8082/user/login
+content-type: application/json
+
+{
+  "password": "111111",
+  "username": "1514010311"
+}
+
+###
+GET http://localhost:8082/course/findOne/5
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTE0MDEwMzExIiwidXNlcklkIjoxNTU2LCJpYXQiOjE1NDgzMzQ1MTMsImV4cCI6MTU0ODkzOTMxM30.NbdXQldaW5Nh2xoaqvNwNBEit6Y0p6t30V6hLYLbGGg
+
+
+###
+GET http://localhost:8082/course/findAll
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTE0MDEwMzExIiwidXNlcklkIjoxNTU2LCJpYXQiOjE1NDgzMzQ1MTMsImV4cCI6MTU0ODkzOTMxM30.NbdXQldaW5Nh2xoaqvNwNBEit6Y0p6t30V6hLYLbGGg
+
+###
+GET http://localhost:8082/course/findByLevel/3
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTE0MDEwMzExIiwidXNlcklkIjoxNTU2LCJpYXQiOjE1NDgzMzQ1MTMsImV4cCI6MTU0ODkzOTMxM30.NbdXQldaW5Nh2xoaqvNwNBEit6Y0p6t30V6hLYLbGGg
+
+###
+DELETE http://localhost:8082/course/delete/7
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTE0MDEwMzExIiwidXNlcklkIjoxNTU2LCJpYXQiOjE1NDgzMzQ1MTMsImV4cCI6MTU0ODkzOTMxM30.NbdXQldaW5Nh2xoaqvNwNBEit6Y0p6t30V6hLYLbGGg
+
+###
