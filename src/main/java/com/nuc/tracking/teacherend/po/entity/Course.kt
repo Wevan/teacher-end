@@ -1,4 +1,4 @@
-package com.nuc.tracking.teacherend.po
+package com.nuc.tracking.teacherend.po.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
@@ -28,5 +28,6 @@ class Course {
     lateinit var score:String
     lateinit var classHour:String
     var requirement:String?=null
+
 
 }

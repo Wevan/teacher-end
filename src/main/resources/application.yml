@@ -34,10 +34,14 @@ spring:
       ddl-auto: update
   main:
     allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
 
 
 server:
-  port: 8082
+  port: 8085
 
 jwt:
   token:

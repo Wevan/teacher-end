@@ -1,21 +1,16 @@
-package com.nuc.tracking.teacherend.po
-
+package com.nuc.tracking.teacherend.po.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
-/**
- * 该类不是课程目标，是课程所修的年级和方向
- */
 @Entity
-@Table(name = "uek_acdemic_course_plan")
+@Table(name = "uek_acdemic_course_class")
 @JsonIgnoreProperties(value = ["id"])
-class CoursePlan {
+class CourseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
+    var teacherId:Long=0
+    var classId:Long=0
     var courseId: Long = 0
-    var grade: Long = 0
-    var subjectId: Long = 0
-
 }

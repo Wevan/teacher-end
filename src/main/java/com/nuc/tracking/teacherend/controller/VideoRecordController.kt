@@ -1,6 +1,6 @@
 package com.nuc.tracking.teacherend.controller
 
-import com.nuc.tracking.teacherend.po.VideoRecord
+import com.nuc.tracking.teacherend.po.entity.VideoRecord
 import com.nuc.tracking.teacherend.result.Result
 import com.nuc.tracking.teacherend.service.VideoRecordService
 import com.nuc.tracking.teacherend.util.ResultUtils
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.logging.Logger
 
 
 @RestController

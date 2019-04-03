@@ -1,7 +1,7 @@
 package com.nuc.tracking.teacherend.service.impl
 
 import com.nuc.tracking.teacherend.exception.ResultException
-import com.nuc.tracking.teacherend.po.Role
+import com.nuc.tracking.teacherend.po.entity.Role
 import com.nuc.tracking.teacherend.repository.*
 import com.nuc.tracking.teacherend.security.JwtTokenProvider
 import com.nuc.tracking.teacherend.service.UserService

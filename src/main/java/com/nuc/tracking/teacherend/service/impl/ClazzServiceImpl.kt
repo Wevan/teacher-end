@@ -1,6 +1,6 @@
 package com.nuc.tracking.teacherend.service.impl
 
-import com.nuc.tracking.teacherend.po.Clazz
+import com.nuc.tracking.teacherend.po.entity.Clazz
 import com.nuc.tracking.teacherend.repository.ClazzRepository
 import com.nuc.tracking.teacherend.service.ClazzService
 import org.slf4j.Logger

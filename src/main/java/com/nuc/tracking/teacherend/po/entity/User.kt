@@ -1,4 +1,4 @@
-package com.nuc.tracking.teacherend.po
+package com.nuc.tracking.teacherend.po.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.springframework.security.core.GrantedAuthority

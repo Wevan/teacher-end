@@ -6,6 +6,7 @@ import com.nuc.tracking.teacherend.service.ExcelService
 import com.nuc.tracking.teacherend.util.ResultUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -19,14 +20,12 @@ class ExcelController {
     @Autowired
     private lateinit var excelService: ExcelService
 
-    @Autowired
-    private lateinit var courseService: CourseService
 
-    @RequestMapping(value = "/excel", method = [RequestMethod.POST])
+    @PostMapping("/excel")
     fun upload(@RequestBody file: MultipartFile): Result {
         val flag = excelService.getExcel(file)
 
-        return ResultUtils.success(200,"save success")
+        return ResultUtils.success(200, "save success")
     }
 
 

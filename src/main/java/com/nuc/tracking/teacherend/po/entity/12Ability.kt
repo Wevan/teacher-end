@@ -1,19 +1,17 @@
-package com.nuc.tracking.teacherend.po
+package com.nuc.tracking.teacherend.po.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 @Entity
-@Table(name = "uek_acdemic_direction")
+@Table(name = "uek_acdemic_ability")
 @JsonIgnoreProperties(value = ["id"])
-class Direction {
+class `12Ability` {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
-    var num: String? = null
     var name: String? = null
     var summary: String? = null
-    var coverImage: String? = null
-    var subjectId: Long = 0
+    var percent:Float=0f
 
 }

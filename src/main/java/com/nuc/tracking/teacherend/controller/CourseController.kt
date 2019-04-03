@@ -1,7 +1,7 @@
 package com.nuc.tracking.teacherend.controller
 
 import com.nuc.tracking.teacherend.result.Result
-import com.nuc.tracking.teacherend.po.Course
+import com.nuc.tracking.teacherend.po.entity.Course
 import com.nuc.tracking.teacherend.service.CourseService
 import com.nuc.tracking.teacherend.util.ResultUtils
 import org.slf4j.Logger

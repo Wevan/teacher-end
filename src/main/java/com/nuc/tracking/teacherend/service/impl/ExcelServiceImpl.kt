@@ -1,6 +1,6 @@
 package com.nuc.tracking.teacherend.service.impl
 
-import com.nuc.tracking.teacherend.po.Excel
+import com.nuc.tracking.teacherend.po.entity.Excel
 import com.nuc.tracking.teacherend.repository.ExcelRepository
 import com.nuc.tracking.teacherend.service.ExcelService
 import org.apache.poi.ss.usermodel.*

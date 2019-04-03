@@ -1,11 +1,8 @@
 package com.nuc.tracking.teacherend.controller
 
-import com.nuc.tracking.teacherend.po.Clazz
+import com.nuc.tracking.teacherend.po.entity.Clazz
 import com.nuc.tracking.teacherend.result.Result
-import com.nuc.tracking.teacherend.po.Course
-import com.nuc.tracking.teacherend.repository.ClazzRepository
 import com.nuc.tracking.teacherend.service.ClazzService
-import com.nuc.tracking.teacherend.service.CourseService
 import com.nuc.tracking.teacherend.util.ResultUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

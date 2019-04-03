@@ -1,21 +1,21 @@
-package com.nuc.tracking.teacherend.po
+package com.nuc.tracking.teacherend.po.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
-
+/**
+ * 课程目标
+ */
 @Entity
-@Table(name = "uek_acdemic_chapter")
+@Table(name = "uek_acdemic_target")
 @JsonIgnoreProperties(value = ["id"])
-class Chapter {
+class CourseTarget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
-    private lateinit var num: String
-    private lateinit var name: String
-    var isDifficult: Long = 0
-    var isImportant: Long = 0
-    var courseId: Long = 0
     var percent: Float = 0f
-
+    private lateinit var name: String
+    private lateinit var about: String
+    var courseId: Long = 0
+    var indecatorId: Long = 0
 }

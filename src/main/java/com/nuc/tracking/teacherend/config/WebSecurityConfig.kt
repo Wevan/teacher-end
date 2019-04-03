@@ -68,6 +68,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .antMatchers("/webjars/**")
                 .antMatchers("/public")
                 .antMatchers("/druid/**")
+                .antMatchers("/resource/getVideo")
     }
 
     /**

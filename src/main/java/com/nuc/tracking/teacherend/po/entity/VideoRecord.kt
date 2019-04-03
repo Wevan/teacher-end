@@ -1,4 +1,4 @@
-package com.nuc.tracking.teacherend.po
+package com.nuc.tracking.teacherend.po.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
@@ -13,5 +13,4 @@ class VideoRecord {
     var userId: Long = 0
     var overtime: String? = null
     var knowledgeId: Long = 0
-
 }

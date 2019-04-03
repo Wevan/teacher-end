@@ -1,7 +1,7 @@
 package com.nuc.tracking.teacherend.service
 
 import com.nuc.tracking.teacherend.exception.ResultException
-import com.nuc.tracking.teacherend.po.Clazz
+import com.nuc.tracking.teacherend.po.entity.Clazz
 
 interface ClazzService {
     @Throws(ResultException::class)
@@ -11,7 +11,7 @@ interface ClazzService {
     fun deleteById(id: Long)
 
     @Throws(ResultException::class)
-    fun findOne(id:Long):Clazz
+    fun findOne(id:Long): Clazz
 
     @Throws(ResultException::class)
     fun findAll():List<Clazz>

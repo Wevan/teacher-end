@@ -1,9 +1,9 @@
 package com.nuc.tracking.teacherend.security
 
-import com.nuc.tracking.teacherend.exception.ResultException
-import com.nuc.tracking.teacherend.po.Student
-import com.nuc.tracking.teacherend.po.Teacher
+import com.nuc.tracking.teacherend.po.entity.Student
+import com.nuc.tracking.teacherend.po.entity.Teacher
 import com.nuc.tracking.teacherend.service.impl.UserServiceImpl
+import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Autowired
@@ -122,7 +122,11 @@ class JwtTokenProvider {
      * @return boolean 返回token是否有效
      */
     fun validateToken(token: String): Boolean {
-        Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token) ?: throw ResultException("无效的token", 500)
+        try {
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+        } catch (ex: ExpiredJwtException) {
+            return false
+        }
         return true
     }
 

@@ -1,7 +1,7 @@
 package com.nuc.tracking.teacherend.service
 
 import com.nuc.tracking.teacherend.exception.ResultException
-import com.nuc.tracking.teacherend.po.Course
+import com.nuc.tracking.teacherend.po.entity.Course
 
 interface CourseService {
     /**
@@ -14,7 +14,7 @@ interface CourseService {
     fun deleteById(id: Long)
 
     @Throws(ResultException::class)
-    fun findOne(id:Long):Course
+    fun findOne(id:Long): Course
 
     @Throws(ResultException::class)
     fun findAll():List<Course>
