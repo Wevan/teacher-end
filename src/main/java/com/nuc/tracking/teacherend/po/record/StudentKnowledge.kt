@@ -9,7 +9,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "student_knowledge")
 @JsonIgnoreProperties(value = ["id"])
-class StudentKonwledge {
+class StudentKnowledge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
