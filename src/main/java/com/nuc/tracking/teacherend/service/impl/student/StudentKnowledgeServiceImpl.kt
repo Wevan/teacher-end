@@ -1,6 +1,7 @@
 package com.nuc.tracking.teacherend.service.impl.student
 
 import com.nuc.tracking.teacherend.po.record.StudentKnowledge
+import com.nuc.tracking.teacherend.repository.student.KnowledgeRepository
 import com.nuc.tracking.teacherend.repository.student.StudentKnowledgeRepository
 import com.nuc.tracking.teacherend.service.student.StudentKnowledgeService
 import org.springframework.beans.factory.annotation.Autowired

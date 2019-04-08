@@ -1,19 +1,20 @@
-package com.nuc.tracking.teacherend.po.relation
+package com.nuc.tracking.teacherend.po.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 /**
- * 课程目标和知识点的关系
+ * 考核方式 - 与特定的课程目标对应
  */
 @Entity
-@Table(name = "course_target_knowledge")
+@Table(name = "global_way")
 @JsonIgnoreProperties(value = ["id"])
-class CourseTarAndKnowledge {
+class GlobalWay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
+    private lateinit var name: String
     var courseId: Long = 0
-    var knowledgeId: Long = 0
     var percent: Float = 0f
+    var resourceId: Long = 0
 }

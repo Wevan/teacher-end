@@ -7,7 +7,7 @@ import javax.persistence.*
  * 全局考核方式的关系
  */
 @Entity
-@Table(name = "knowledge_way")
+@Table(name = "student_daily_way")
 @JsonIgnoreProperties(value = ["id"])
 class StudentDailyWay {
     @Id

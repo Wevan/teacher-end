@@ -7,7 +7,7 @@ import javax.persistence.*
  * 学生对单个资源的完成度
  */
 @Entity
-@Table(name = "uek_student_resource")
+@Table(name = "student_resource")
 @JsonIgnoreProperties(value = ["id"])
 
 class StudentResource {

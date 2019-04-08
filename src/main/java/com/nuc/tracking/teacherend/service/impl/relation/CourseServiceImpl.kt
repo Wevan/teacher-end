@@ -1,8 +1,8 @@
-package com.nuc.tracking.teacherend.service.impl
+package com.nuc.tracking.teacherend.service.impl.relation
 
 import com.nuc.tracking.teacherend.po.entity.Course
 import com.nuc.tracking.teacherend.repository.CourseRepository
-import com.nuc.tracking.teacherend.service.CourseService
+import com.nuc.tracking.teacherend.service.relation.CourseService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired

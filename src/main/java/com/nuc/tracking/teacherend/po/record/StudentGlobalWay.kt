@@ -7,7 +7,7 @@ import javax.persistence.*
  * 学生的全局考核方式完成度
  */
 @Entity
-@Table(name = "uek_student_resource")
+@Table(name = "student_global_way")
 @JsonIgnoreProperties(value = ["id"])
 class StudentGlobalWay {
     @Id

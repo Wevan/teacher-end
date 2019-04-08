@@ -1,9 +1,9 @@
 package com.nuc.tracking.teacherend.service.student
 
 import com.nuc.tracking.teacherend.exception.ResultException
-import com.nuc.tracking.teacherend.po.record.StudentGlobalWay
+import com.nuc.tracking.teacherend.po.record.Student12Ability
 
-interface StudentGlobalWayService {
+interface Student12AbilityService {
     @Throws(ResultException::class)
-    fun save(studentGlobalWay: StudentGlobalWay)
+    fun save(student12Ability: Student12Ability)
 }
