@@ -6,4 +6,7 @@ import com.nuc.tracking.teacherend.po.record.StudentResource
 interface StudentResourceService {
     @Throws(ResultException::class)
     fun save(studentResource: StudentResource)
+
+    @Throws(ResultException::class)
+    fun findOne(id: Long): StudentResource
 }

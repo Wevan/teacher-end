@@ -21,5 +21,6 @@ class Knowledge {
     var courseId: Long = 0
     var clickNum: Long = 0
     var chapterId: Long = 0
+    var percent:Float = 0f
 
 }

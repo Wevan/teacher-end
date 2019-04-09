@@ -6,4 +6,7 @@ import com.nuc.tracking.teacherend.po.record.StudentCourseTarget
 interface StudentCourseTargetService {
     @Throws(ResultException::class)
     fun save(studentCourseTarget: StudentCourseTarget)
+
+    @Throws(ResultException::class)
+    fun findOne(id: Long): StudentCourseTarget
 }

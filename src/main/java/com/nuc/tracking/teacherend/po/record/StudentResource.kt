@@ -16,6 +16,7 @@ class StudentResource {
     var id: Long = 0
     var studentId:Long =0
     var resourceId:Long =0
+    var knowledgeId:Long =0
     var courseId: Long = 0
     var percent: Float = 0f
     var clazzId: Long = 0

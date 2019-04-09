@@ -6,4 +6,7 @@ import com.nuc.tracking.teacherend.po.record.StudentDailyWay
 interface StudentDailyWayService {
     @Throws(ResultException::class)
     fun save(studentDailyWay: StudentDailyWay)
+
+    @Throws(ResultException::class)
+    fun findOne(id: Long): StudentDailyWay
 }

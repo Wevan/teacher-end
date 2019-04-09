@@ -6,4 +6,7 @@ import com.nuc.tracking.teacherend.po.record.StudentKnowledge
 interface StudentKnowledgeService {
     @Throws(ResultException::class)
     fun save(studentKnowledge: StudentKnowledge)
+
+    @Throws(ResultException::class)
+    fun findOne(id: Long): StudentKnowledge
 }

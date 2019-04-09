@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class Student12AbilityServiceImpl: Student12AbilityService {
+    override fun findOne(id: Long): Student12Ability {
+        val ability:Student12Ability = student12AbilityRepository.findById(id).get()
+        return ability
+    }
+
     @Autowired
     private lateinit var student12AbilityRepository: Student12AbilityRepository
     override fun save(student12Ability: Student12Ability) {

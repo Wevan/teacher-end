@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class StudentKnowledgeServiceImpl :StudentKnowledgeService {
+    override fun findOne(id: Long): StudentKnowledge {
+        val studentKnowledge = studentKnowledgeRepository.findById(id).get()
+        return studentKnowledge
+    }
+
     @Autowired
     private lateinit var studentKnowledgeRepository: StudentKnowledgeRepository
     override fun save(studentKnowledge: StudentKnowledge) {
