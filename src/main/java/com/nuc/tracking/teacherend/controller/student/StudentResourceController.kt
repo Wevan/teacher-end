@@ -59,27 +59,6 @@ class StudentResourceController {
     fun insertRecord(@RequestBody studentResource: StudentResource): Result {
         //资源记录
         val msg = studentResourceService.save(studentResource)
-        //知识点记录
-        var knowledge: Knowledge = knowledgeService.findOne(studentResource.knowledgeId)
-        var studentKnowledge = StudentKnowledge()
-        studentKnowledge.percent = studentResource.percent * dailyWayService.findByResourceId(studentResource.resourceId).percent*
-                knowledge.percent
-        studentKnowledge.chapterId = studentResource.chapterId
-        studentKnowledge.courseId = studentResource.courseId
-        studentKnowledge.tqPercent =dailyWayService.findByResourceId(studentResource.resourceId).percent*
-                knowledgeService.findOne(studentKnowledge.knowledgeId).percent
-        studentKnowledge.chapterId = studentResource.chapterId
-        studentKnowledge.dateTime=Date(System.currentTimeMillis()).toString()
-                studentKnowledgeService.save(studentKnowledge)
-        //课程目标达成度
-//        var courseTargetList:List<CourseTarget> =
-//        var courseTarget:CourseTarget=courseTargetService.findOne(studentResource.)
-        //课程达成度
-
-        //专业目标达成度
-
-        //毕业目标达成度
-
         return ResultUtils.success(200, "插入记录成功", msg)
     }
 }

@@ -15,5 +15,6 @@ class CourseTarAndKnowledge {
     var id: Long = 0
     var courseId: Long = 0
     var knowledgeId: Long = 0
+    var courseTargetId:Long=0
     var percent: Float = 0f
 }

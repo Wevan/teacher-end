@@ -16,5 +16,5 @@ class StudentCourse {
     var courseId: Long = 0
     var studentId: Long = 0
     var percent: Float = 0f
-    var tqPercent: Long = 0
+    var tqPercent: Float = 0f
 }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CollegeTargetRepository: JpaRepository<CollegeTarget, Long> {
+
 }

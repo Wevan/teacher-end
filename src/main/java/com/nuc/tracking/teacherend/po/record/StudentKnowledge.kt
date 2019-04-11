@@ -19,4 +19,5 @@ class StudentKnowledge {
     var dateTime:String=""
     var percent:Float=0f
     var tqPercent:Float=0f
+    var studentId:Long=0
 }

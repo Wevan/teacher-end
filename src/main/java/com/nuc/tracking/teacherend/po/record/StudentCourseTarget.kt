@@ -13,7 +13,7 @@ class StudentCourseTarget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
-    var studentId = 0
+    var studentId:Long = 0
     var percent: Float = 0f
     var courseTargetId: Long = 0
     var tqPercent: Float = 0f
