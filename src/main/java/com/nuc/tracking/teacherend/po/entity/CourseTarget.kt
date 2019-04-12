@@ -14,7 +14,7 @@ class CourseTarget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
     var percent: Float = 0f
-    private lateinit var name: String
+    var name: String=""
     private lateinit var about: String
     var courseId: Long = 0
     var indecatorId: Long = 0

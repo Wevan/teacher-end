@@ -12,19 +12,13 @@ class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
+    var num: String=""
+    var name: String=""
+    var about: String=""
 
-    var num: String?=null
-
-    lateinit var name: String
-
-    var about: String?=null
     lateinit var coverImage: String
     lateinit var level:String
-    @NotNull
-    @NotEmpty
     lateinit var direction:String
-    @NotEmpty
-    @NotNull
     lateinit var score:String
     lateinit var classHour:String
     var requirement:String?=null

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface DailyWayRepository: JpaRepository<DailyWay, Long> {
-    fun findDailyWayByResourceId(id:Long):DailyWay
+    fun findDailyWayByCourseIdAndType(id:Long,type:String):DailyWay
 }

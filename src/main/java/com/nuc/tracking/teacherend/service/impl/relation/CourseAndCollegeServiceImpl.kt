@@ -6,7 +6,9 @@ import com.nuc.tracking.teacherend.service.relation.CourseAndCollegeService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class CourseAndCollegeServiceImpl: CourseAndCollegeService {
     private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 

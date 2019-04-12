@@ -17,7 +17,7 @@ class ResourceDirctoryFile {
     var url: String? = null
     var type: Long = 0
     var size: String? = null
-    var percent: Long = 0
+    var percent: Float = 0f
     var courseId: Long = 0
     var chapterId: Long = 0
 

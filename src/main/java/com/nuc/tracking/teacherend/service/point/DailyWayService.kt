@@ -11,5 +11,5 @@ interface DailyWayService {
     fun findOne(id: Long): DailyWay
 
     @Throws(ResultException::class)
-    fun findByResourceId(id: Long): DailyWay
+    fun findDailyWayByCourseIdAndType(id: Long,type:String): DailyWay
 }

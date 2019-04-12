@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 @Entity
-@Table(name = "uek_student_resource")
+@Table(name = "uek_college_target")
 @JsonIgnoreProperties(value = ["id"])
 
 class CollegeTarget {
@@ -12,4 +12,5 @@ class CollegeTarget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
     var percent: Float = 0f
+    var name:String=""
 }

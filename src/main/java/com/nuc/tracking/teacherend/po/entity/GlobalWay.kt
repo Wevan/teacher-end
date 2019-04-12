@@ -13,7 +13,7 @@ class GlobalWay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
-    private lateinit var name: String
+    var name: String=""
     var courseId: Long = 0
     var percent: Float = 0f
     var resourceId: Long = 0

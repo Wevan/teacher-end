@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class DailyWayServiceImpl:DailyWayService {
-    override fun findByResourceId(id: Long): DailyWay {
-        val dailyWay = dailyWayRepository.findDailyWayByResourceId(id)
+    override fun findDailyWayByCourseIdAndType(id: Long,type:String): DailyWay {
+        val dailyWay = dailyWayRepository.findDailyWayByCourseIdAndType(id,type)
         return dailyWay
     }
 
