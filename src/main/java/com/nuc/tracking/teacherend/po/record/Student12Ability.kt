@@ -14,7 +14,7 @@ class Student12Ability {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
     var studentId: Long = 0
-    var collegeTargetId:Long=0
+    var abilityId:Long=0
     var date: String = ""
     var percent:Float=0f
     var tqPercent:Float=0f

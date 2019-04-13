@@ -3,10 +3,7 @@ package com.nuc.tracking.teacherend.service.impl.student
 import com.nuc.tracking.teacherend.po.entity.Knowledge
 import com.nuc.tracking.teacherend.po.entity.Student
 import com.nuc.tracking.teacherend.po.record.*
-import com.nuc.tracking.teacherend.repository.point.CollegeTargetRepository
-import com.nuc.tracking.teacherend.repository.point.CourseTargetRepository
-import com.nuc.tracking.teacherend.repository.point.DailyWayRepository
-import com.nuc.tracking.teacherend.repository.point.ResourceRepository
+import com.nuc.tracking.teacherend.repository.point.*
 import com.nuc.tracking.teacherend.repository.relation.CollegeAndAbilityRepository
 import com.nuc.tracking.teacherend.repository.relation.CourseAndCollegeRepository
 import com.nuc.tracking.teacherend.repository.relation.CourseTarAndKnowledgeRepository
@@ -53,10 +50,11 @@ class StudentResourceServiceImpl : StudentResourceService {
     private lateinit var resourceRepository: ResourceRepository
     @Autowired
     private lateinit var collegeTargetRepository: CollegeTargetRepository
-
+    @Autowired
+    private lateinit var rAbilityRepository: RAbilityRepository
 
     override fun save(studentResource: StudentResource) {
-//        studentResourceRepository.save(studentResource)
+        studentResourceRepository.save(studentResource)
         /**
          * 知识点记录=>知识点的完成度+= 资源完成度*资源所占百分比*资源对应的考核方式
          */
@@ -81,7 +79,7 @@ class StudentResourceServiceImpl : StudentResourceService {
         println("" + studentResource.percent + "*" + dailyWayRepository.findDailyWayByCourseIdAndType(studentResource.courseId, "1").percent + "*" +
                 resourceRepository.findById(studentResource.resourceId).get().percent + "=" + studentKnowledge.percent)
         println()
-//        studentknowledgeRepository.save(studentKnowledge)
+        studentknowledgeRepository.save(studentKnowledge)
 
         /**
          * 课程目标达成度+= 知识点的完成度*该知识点在知识点中的percent*该知识点所占课程的百分比，存入与知识点对应的各个课程目标即可
@@ -103,7 +101,7 @@ class StudentResourceServiceImpl : StudentResourceService {
 
             studentCourseTarget.tqPercent += studentKnowledge.tqPercent * knowledge.percent * item.percent
 
-//            studentCourseTargetRepository.save(studentCourseTarget)
+            studentCourseTargetRepository.save(studentCourseTarget)
             println("" + studentKnowledge.percent + "*" + knowledge.percent + "*" + item.percent + "=" + studentCourseTarget.percent)
             println()
             return@map studentCourseTarget!!
@@ -130,7 +128,7 @@ class StudentResourceServiceImpl : StudentResourceService {
                     studentCourse.percent)
             println()
         }
-//        studentCourseRepository.save(studentCourse)
+        studentCourseRepository.save(studentCourse)
         /**
          * 专业目标达成度+= 与该课程对应的专业目标*课程达成度
          */
@@ -152,7 +150,7 @@ class StudentResourceServiceImpl : StudentResourceService {
 
             println("" + studentCourse.percent + "*" + item.percent + "=" + studentCollegeTarget.percent)
             println()
-//            studentCollegeTargetRepository.save(studentCollegeTarget)
+            studentCollegeTargetRepository.save(studentCollegeTarget)
             return@map studentCollegeTarget!!
         }
 
@@ -162,39 +160,37 @@ class StudentResourceServiceImpl : StudentResourceService {
          */
 
         println("毕业目标达成度+= 对应的专业目标达成度*专业目标之间的占比*毕业目标占比")
-        var student12AbilityList = student12AbilityRepository.findAll()
-//        毕业目标列表
+        var student12AbilityList = rAbilityRepository.findAll()
+
+        //毕业目标列表
         student12AbilityList.map { item2 ->
-            //            专业目标列表
 
-//                根据毕业目标作基准开始迭代，故先以毕业目标去查询关系
-            var collegeAndAbility = collegeAndAbilityRepository.findByAbilityId(item2.id)
-//                  关系列表迭代
-            collegeAndAbility.map { item1 ->
-                studentCollegeTargetList.forEach { item ->
-                    //                    初始化存储对象
-                    var studentRAbility = student12AbilityRepository.findByStudentIdAndCollegeTargetId(
-                            studentResource.studentId, item.collegeTargetId
-                    )
-                    if (studentRAbility == null) {
-                        studentRAbility = Student12Ability()
-                        studentRAbility.studentId = studentResource.studentId
-                        studentRAbility.collegeTargetId = item.collegeTargetId
-                    }
-                    studentRAbility.date = Date(System.currentTimeMillis()).toString()
-
-                    studentRAbility.percent += item.percent * collegeTargetRepository.findById(item.collegeTargetId).get().percent * item1.percent
-                    studentRAbility.tqPercent += item.tqPercent * item1.percent
-                    println("" + item.percent + "*" + item1.percent + "*" + collegeTargetRepository.findById(item.collegeTargetId).get().percent + "=" + studentRAbility.percent)
-                    println()
-
-
-//                student12AbilityRepository.save(studentRAbility)
-                }
+            var studentRAbility = student12AbilityRepository.findByStudentIdAndAbilityId(
+                    studentResource.studentId, item2.id
+            )
+            if (studentRAbility == null) {
+                studentRAbility = Student12Ability()
+                studentRAbility.studentId = studentResource.studentId
+                studentRAbility.abilityId = item2.id
             }
 
+            //专业目标列表
+            studentCollegeTargetList.forEach { item ->
+                //初始化存储对象
 
+                studentRAbility.date = Date(System.currentTimeMillis()).toString()
+                var relation = collegeAndAbilityRepository.findByCollegeTargetIdAndAbilityId(item.collegeTargetId, item2.id)
+
+                if (relation != null) {
+                    relation.map { item1 ->
+                        studentRAbility.percent += item.percent * collegeTargetRepository.findById(item.collegeTargetId).get().percent * item1.percent
+                        studentRAbility.tqPercent += item.tqPercent * item1.percent * collegeTargetRepository.findById(item.collegeTargetId).get().percent
+                        println("" + item.percent + "*" + item1.percent + "*" + collegeTargetRepository.findById(item.collegeTargetId).get().percent + "=" + studentRAbility.percent)
+                        println()
+                    }
+                }
+            }
+            student12AbilityRepository.save(studentRAbility)
         }
-
     }
 }
