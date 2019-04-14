@@ -15,6 +15,7 @@ class StudentDailyWay {
     var id: Long = 0
     var typeId:Long = 0
     var courseId: Long = 0
+    var studentId: Long = 0
     var typeName: String = ""
     var percent: Float = 0f
 }

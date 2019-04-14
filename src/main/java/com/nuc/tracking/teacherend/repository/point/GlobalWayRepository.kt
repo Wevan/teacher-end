@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface GlobalWayRepository : JpaRepository<GlobalWay, Long> {
+    fun findByCourseIdAndType(courseId: Long, type: String): GlobalWay
 }

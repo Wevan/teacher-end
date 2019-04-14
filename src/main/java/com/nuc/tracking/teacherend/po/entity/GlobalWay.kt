@@ -16,5 +16,5 @@ class GlobalWay {
     var name: String=""
     var courseId: Long = 0
     var percent: Float = 0f
-    var resourceId: Long = 0
+    var type: String = ""
 }
