@@ -70,6 +70,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .antMatchers("/druid/**")
                 .antMatchers("/resource/getVideo")
                 .antMatchers("/studentGlobalWay/insert")
+                .antMatchers("/demo")
+                .antMatchers("/report/file")
     }
 
     /**

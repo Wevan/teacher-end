@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Report</title>
+    <meta name="description"
+          content="Creating a Zebra table with Bootstrap. Learn with example of a Zebra Table with Bootstrap.">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div style="align-content: center;margin: 8%">
+    <h1>综合报告-学生版</h1>
+    <div style="margin-top:5%;font-family: '微软雅黑 Light',serif;font-size: large">
+        <b style="margin-right: 5%">班级：15140A01</b>
+        <b style="margin-right: 5%"></b>
+        <b style="margin-right: 5%">学号：1514010311</b>
+        <b style="margin-right: 5%"></b>
+        <b style="margin-right: 5%">姓名：曹华珠</b>
+        <b style="margin-right: 5%"></b>
+    </div>
+    <h2 style="margin-top:5%;">所修课程</h2>
+
+    <h3>数据结构</h3>
+    <h4>课程达标度：87.43%</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>课程目标</th>
+            <th>课程达成度</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>001</td>
+            <td>Rammohan</td>
+            <td>A+</td>
+        </tr>
+        <tr>
+            <td>002</td>
+            <td>Smita</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>003</td>
+            <td>Rabindranath</td>
+            <td>A+</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>离散数学</h3>
+    <h4>课程达标度：87.43%</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>课程目标</th>
+            <th>课程达成度</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>001</td>
+            <td>Rammohan</td>
+            <td>A+</td>
+        </tr>
+        <tr>
+            <td>002</td>
+            <td>Smita</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>003</td>
+            <td>Rabindranath</td>
+            <td>A+</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2 style="margin-top:5%;">专业目标</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>课程目标</th>
+            <th>课程达成度</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>001</td>
+            <td>Rammohan</td>
+            <td>A+</td>
+        </tr>
+        <tr>
+            <td>002</td>
+            <td>Smita</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>003</td>
+            <td>Rabindranath</td>
+            <td>A+</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2 style="margin-top:5%;">毕业目标</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>课程目标</th>
+            <th>课程达成度</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>001</td>
+            <td>Rammohan</td>
+            <td>A+</td>
+        </tr>
+        <tr>
+            <td>002</td>
+            <td>Smita</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>003</td>
+            <td>Rabindranath</td>
+            <td>A+</td>
+        </tr>
+        </tbody>
+    </table>
+ <!--/*@thymesVar id="test" type="com.nuc.tracking.teacherend.controller.DemoController"*/-->
+ <div th:text="${test}"></div>
+</div>
+
+
+</body>
+</html>
