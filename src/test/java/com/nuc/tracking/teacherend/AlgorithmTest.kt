@@ -1,10 +1,12 @@
 package com.nuc.tracking.teacherend
 
 import com.nuc.tracking.teacherend.po.entity.*
+import com.nuc.tracking.teacherend.po.record.Student12Ability
 import com.nuc.tracking.teacherend.po.record.StudentResource
 import com.nuc.tracking.teacherend.po.relation.CollegeAndAbility
 import com.nuc.tracking.teacherend.po.relation.CourseAndCollege
 import com.nuc.tracking.teacherend.po.relation.CourseTarAndKnowledge
+import com.nuc.tracking.teacherend.repository.student.Student12AbilityRepository
 import com.nuc.tracking.teacherend.service.point.*
 import com.nuc.tracking.teacherend.service.relation.CollegeAndAbilityService
 import com.nuc.tracking.teacherend.service.relation.CourseAndCollegeService
@@ -15,6 +17,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
+import java.sql.Date
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
@@ -45,6 +48,9 @@ class AlgorithmTest {
     lateinit var courseTarAndKnowledgeService: CourseTarAndKnowledgeService
     @Autowired
     lateinit var studentResourceService: StudentResourceService
+
+    @Autowired
+    private lateinit var student12AbilityRepository: Student12AbilityRepository
 
     @Test
     fun test1() {
@@ -286,7 +292,7 @@ class AlgorithmTest {
          * uid 811
          */
         var studentResource=StudentResource()
-        studentResource.studentId=811
+        studentResource.studentId=1713010101
         studentResource.courseId=9
         studentResource.knowledgeId=1530
         studentResource.resourceId=133
@@ -297,30 +303,37 @@ class AlgorithmTest {
 
     @Test
     fun test3(){
-        /**
-         * 课程目标和知识点的对应关系，只取知识点1作测试
-         */
-        var courseTarAndKnowledge1=CourseTarAndKnowledge()
-        courseTarAndKnowledge1.courseId=9
-        courseTarAndKnowledge1.courseTargetId=1
-        courseTarAndKnowledge1.knowledgeId=1
-        courseTarAndKnowledge1.percent=0.3f
-
-        var courseTarAndKnowledge2=CourseTarAndKnowledge()
-        courseTarAndKnowledge2.courseId=9
-        courseTarAndKnowledge2.courseTargetId=2
-        courseTarAndKnowledge2.knowledgeId=1
-        courseTarAndKnowledge2.percent=0.3f
-
-        var courseTarAndKnowledge3=CourseTarAndKnowledge()
-        courseTarAndKnowledge3.courseId=9
-        courseTarAndKnowledge3.courseTargetId=3
-        courseTarAndKnowledge3.knowledgeId=1
-        courseTarAndKnowledge3.percent=0.5f
-
-        courseTarAndKnowledgeService.save(courseTarAndKnowledge1)
-        courseTarAndKnowledgeService.save(courseTarAndKnowledge2)
-        courseTarAndKnowledgeService.save(courseTarAndKnowledge3)
+//        /**
+////         * 课程目标和知识点的对应关系，只取知识点1作测试
+////         */
+////        var courseTarAndKnowledge1=CourseTarAndKnowledge()
+////        courseTarAndKnowledge1.courseId=9
+////        courseTarAndKnowledge1.courseTargetId=1
+////        courseTarAndKnowledge1.knowledgeId=1
+////        courseTarAndKnowledge1.percent=0.3f
+////
+////        var courseTarAndKnowledge2=CourseTarAndKnowledge()
+////        courseTarAndKnowledge2.courseId=9
+////        courseTarAndKnowledge2.courseTargetId=2
+////        courseTarAndKnowledge2.knowledgeId=1
+////        courseTarAndKnowledge2.percent=0.3f
+////
+////        var courseTarAndKnowledge3=CourseTarAndKnowledge()
+////        courseTarAndKnowledge3.courseId=9
+////        courseTarAndKnowledge3.courseTargetId=3
+////        courseTarAndKnowledge3.knowledgeId=1
+////        courseTarAndKnowledge3.percent=0.5f
+////
+////        courseTarAndKnowledgeService.save(courseTarAndKnowledge1)
+////        courseTarAndKnowledgeService.save(courseTarAndKnowledge2)
+////        courseTarAndKnowledgeService.save(courseTarAndKnowledge3)
+        var studentRAbility = Student12Ability()
+        studentRAbility.studentId = 812L
+        studentRAbility.abilityId = 1
+        studentRAbility.percent = 0.5f
+        studentRAbility.tqPercent = 0.2f
+        studentRAbility.date = Date(System.currentTimeMillis()).toString()
+        student12AbilityRepository.save(studentRAbility)
     }
 
 }

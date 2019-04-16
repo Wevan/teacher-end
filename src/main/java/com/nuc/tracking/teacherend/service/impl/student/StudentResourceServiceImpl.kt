@@ -173,12 +173,11 @@ class StudentResourceServiceImpl : StudentResourceService {
                 studentRAbility.studentId = studentResource.studentId
                 studentRAbility.abilityId = item2.id
             }
-
-            //专业目标列表
+//            专业目标列表
             studentCollegeTargetList.forEach { item ->
+                studentRAbility.date = Date(System.currentTimeMillis()).toString()
                 //初始化存储对象
 
-                studentRAbility.date = Date(System.currentTimeMillis()).toString()
                 var relation = collegeAndAbilityRepository.findByCollegeTargetIdAndAbilityId(item.collegeTargetId, item2.id)
 
                 if (relation != null) {
@@ -190,6 +189,7 @@ class StudentResourceServiceImpl : StudentResourceService {
                     }
                 }
             }
+
             student12AbilityRepository.save(studentRAbility)
         }
     }

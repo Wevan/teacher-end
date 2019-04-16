@@ -10,6 +10,7 @@
 <body>
 
 <div style="align-content: center;margin: 8%">
+
     <h1>课程综合报告-教师版</h1>
     <div style="margin-right: 10%;margin-top:5%;font-family: '微软雅黑 Light',serif;font-size: large">
         <span>课程：</span>
@@ -18,67 +19,32 @@
         <span>李华玲</span>
     </div>
     <h2>所修班级</h2>
+    <!--/*@thymesVar id="result" type="com.nuc.tracking.teacherend.controller.DemoController"*/-->
+    <div th:each="stu: ${result}">
+        <div th:each="mapS:${stu}">
+            <h3>[[${mapS.key}]]</h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>课程达成度</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="items: ${mapS.value}">
+                    <td>[[${items.studentCourse.studentId}]]</td>
+                    <td>[[${items.name}]]</td>
+                    <td>[[${items.studentCourse.percent}]]</td>
+                </tr>
+                </tbody>
+            </table>
 
-    <h3>17130101</h3>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>学号</th>
-            <th>姓名</th>
-            <th>课程达成度</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>001</td>
-            <td>Rammohan</td>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>002</td>
-            <td>Smita</td>
-            <td>A</td>
-        </tr>
-        <tr>
-            <td>003</td>
-            <td>Rabindranath</td>
-            <td>A+</td>
-        </tr>
-        </tbody>
-    </table>
+        </div>
+    </div>
 
-    <h3>17130102</h3>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>学号</th>
-            <th>姓名</th>
-            <th>课程达成度</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>001</td>
-            <td>Rammohan</td>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>002</td>
-            <td>Smita</td>
-            <td>A</td>
-        </tr>
-        <tr>
-            <td>003</td>
-            <td>Rabindranath</td>
-            <td>A+</td>
-        </tr>
-        </tbody>
-    </table>
-    <!--/*@thymesVar id="test" type="com.nuc.tracking.teacherend.controller.DemoController"*/-->
-    <div th:text="${test}"></div>
 
 </div>
-
 
 
 </body>

@@ -15,4 +15,5 @@ interface ClazzService {
 
     @Throws(ResultException::class)
     fun findAll():List<Clazz>
+
 }

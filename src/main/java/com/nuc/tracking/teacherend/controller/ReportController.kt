@@ -1,5 +1,6 @@
 package com.nuc.tracking.teacherend.controller
 
+import com.google.common.collect.Maps
 import com.nuc.tracking.teacherend.util.HtmlToPdf
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -16,9 +17,12 @@ class ReportController {
 
     @GetMapping("/file")
     fun report() {
-        val s = restTemplate.getForObject<String>("http://localhost:8085/demo")
-        var file= File("E:/a/kk.html")
-        if (!file.exists()){
+        var url = "http://localhost:8085/demo?id=1514010311&type=1&courseId=9"
+        val s = restTemplate.getForObject<String>(url)
+
+//        val s = restTemplate.getForObject<String>("http://localhost:8085/demo")
+        var file = File("E:/a/test.html")
+        if (!file.exists()) {
             val parent = file.parent
             File(parent).apply {
                 this.mkdir();
@@ -27,7 +31,7 @@ class ReportController {
 
         file.writeText(s!!)
 
-        var down= HtmlToPdf.tomPdf("E:/a/kk.html","E:/a/kk.pdf")
-        var msg=""
+        var down = HtmlToPdf.tomPdf("E:/a/test.html", "E:/a/test.pdf")
+        var msg = ""
     }
 }

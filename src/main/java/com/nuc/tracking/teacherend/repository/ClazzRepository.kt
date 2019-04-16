@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ClazzRepository : JpaRepository<Clazz, Long> {
-
+    fun findByNum(num: String): Clazz
 }

@@ -14,4 +14,5 @@ interface StudentRepository : JpaRepository<Student, Long> {
      * @param studentNumber studentNumber
      */
     fun findByStudentNumber(studentNumber: String): Student?
+    fun findByClassId(classId:Long):List<Student>
 }
