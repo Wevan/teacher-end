@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface CourseRepository : JpaRepository<Course, Long> {
     fun findCourseByLevel(level: String): List<Course>?
+
 }

@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface Student12AbilityRepository: JpaRepository<Student12Ability, Long> {
     fun findByStudentIdAndAbilityId(studentId:Long,abilityId:Long):Student12Ability?
+    fun findByStudentId(studentId:Long):List<Student12Ability>?
 }

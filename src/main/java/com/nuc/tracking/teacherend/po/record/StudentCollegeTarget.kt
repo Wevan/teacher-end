@@ -15,7 +15,6 @@ class StudentCollegeTarget {
     var id: Long = 0
     var studentId:Long = 0
     var percent: Float = 0f
-    var courseId:Long=0
     var collegeTargetId: Long = 0
     var tqPercent: Float = 0f
     var dateTime: String = ""

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface StudentCollegeTargetRepository: JpaRepository<StudentCollegeTarget, Long> {
-    fun findAllByCourseIdAndStudentId(id:Long,studentId:Long):List<StudentCollegeTarget>?
-    fun findAllByCourseIdAndStudentIdAndCollegeTargetId(id:Long,studentId:Long,collegeId:Long):StudentCollegeTarget?
+    fun findAllByStudentId(studentId:Long):List<StudentCollegeTarget>?
+    fun findAllByStudentIdAndCollegeTargetId(studentId:Long,collegeId:Long):StudentCollegeTarget?
 }

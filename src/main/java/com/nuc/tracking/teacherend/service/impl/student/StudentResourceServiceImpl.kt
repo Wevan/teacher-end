@@ -94,6 +94,7 @@ class StudentResourceServiceImpl : StudentResourceService {
                 studentCourseTarget = StudentCourseTarget()
                 studentCourseTarget.courseTargetId = item.courseTargetId
                 studentCourseTarget.studentId = studentResource.studentId
+                studentCourseTarget.courseId=studentResource.courseId
             }
             studentCourseTarget.dateTime = Date(System.currentTimeMillis()).toString()
 
@@ -135,15 +136,14 @@ class StudentResourceServiceImpl : StudentResourceService {
         var collegeTargetList = courseAndCollegeRepository.findAllByCourseId(studentResource.courseId)
         println("专业目标达成度+= 与该课程对应的专业目标*课程达成度")
         val studentCollegeTargetList = collegeTargetList.map { item ->
-            var studentCollegeTarget = studentCollegeTargetRepository.findAllByCourseIdAndStudentIdAndCollegeTargetId(
-                    studentResource.courseId, studentResource.studentId, item.collegeTargetId
+            var studentCollegeTarget = studentCollegeTargetRepository.findAllByStudentIdAndCollegeTargetId(
+                    studentResource.studentId, item.collegeTargetId
             )
             if (studentCollegeTarget == null) {
                 studentCollegeTarget = StudentCollegeTarget()
                 studentCollegeTarget.studentId = studentResource.studentId
                 studentCollegeTarget.collegeTargetId = item.collegeTargetId
                 studentCollegeTarget.dateTime = Date(System.currentTimeMillis()).toString()
-                studentCollegeTarget.courseId = studentResource.courseId
             }
             studentCollegeTarget.percent += studentCourse.percent * item.percent
             studentCollegeTarget.tqPercent += studentCourse.tqPercent * item.percent

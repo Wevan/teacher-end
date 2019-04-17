@@ -46,6 +46,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .antMatchers("/druid/**").permitAll()
                 .antMatchers("/user/login").permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/demo").permitAll()
                 .anyRequest().authenticated()
 
 //        http.authorizeRequests().antMatchers("/teachermain").hasRole("教师")
@@ -71,6 +72,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .antMatchers("/resource/getVideo")
                 .antMatchers("/studentGlobalWay/insert")
                 .antMatchers("/demo")
+                .antMatchers("/student")
                 .antMatchers("/report/file")
     }
 

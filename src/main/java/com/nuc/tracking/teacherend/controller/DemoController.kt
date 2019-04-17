@@ -16,7 +16,7 @@ class DemoController {
     @RequestMapping("demo")
     fun getDemo(modelAndView: ModelAndView, @RequestParam id: String, @RequestParam type: String, @RequestParam courseId: String): ModelAndView {
         println("DemoController param: id $id, type $type,courseId $courseId")
-        modelAndView.viewName = "demo"
+
         modelAndView.model["id"] = id
         modelAndView.model["type"] = type
 
@@ -34,6 +34,32 @@ class DemoController {
 //                    }
 //                }
 //            }
+            modelAndView.viewName = "demo"
+            modelAndView.model["result"]=result
+        }else{
+            var result=courseClassService.getStudentMesg(id.toLong())
+//            println("*******************************************")
+//            result.studentAbilityList.forEach {
+//                println("AbilityList "+it.name+","+it.ability.percent+"%")
+//            }
+//            println("*******************************************")
+//            result.studentCourseList.forEach { (t, u) ->
+//                println("Course is "+u.name+","+u.studentCourse.percent)
+//
+//                u.studentCourseTargetList.forEach { (ts, u) ->
+//                    u.forEach {rr->
+//                        println("Course Target is "+rr.name+","+rr.studentCourseTarget.percent)
+//                    }
+//                }
+//                println("------------------------------------------------")
+//            }
+//            println("*******************************************")
+//            result.studentCollegeTargetList.forEach {tem->
+//                println("CollegeTarget is "+tem.name+","+tem.studentCollegeTarget.percent)
+//            }
+
+
+            modelAndView.viewName = "student"
             modelAndView.model["result"]=result
         }
 
