@@ -20,5 +20,6 @@ class ResourceDirctoryFile {
     var percent: Float = 0f
     var courseId: Long = 0
     var chapterId: Long = 0
+    var knowledgeId: Long = 0
 
 }

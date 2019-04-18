@@ -64,10 +64,9 @@ class StudentResourceServiceImpl : StudentResourceService {
                 studentResource.studentId)
         if (studentKnowledge == null) {
             studentKnowledge = StudentKnowledge()
-            studentKnowledge.chapterId = studentResource.chapterId
             studentKnowledge.courseId = studentResource.courseId
-            studentKnowledge.chapterId = studentResource.chapterId
             studentKnowledge.studentId = studentResource.studentId
+            studentKnowledge.knowledgeId = studentResource.knowledgeId
         }
         studentKnowledge.percent += studentResource.percent * dailyWayRepository.findDailyWayByCourseIdAndType(studentResource.courseId, "1").percent *
                 resourceRepository.findById(studentResource.resourceId).get().percent
@@ -94,7 +93,7 @@ class StudentResourceServiceImpl : StudentResourceService {
                 studentCourseTarget = StudentCourseTarget()
                 studentCourseTarget.courseTargetId = item.courseTargetId
                 studentCourseTarget.studentId = studentResource.studentId
-                studentCourseTarget.courseId=studentResource.courseId
+                studentCourseTarget.courseId = studentResource.courseId
             }
             studentCourseTarget.dateTime = Date(System.currentTimeMillis()).toString()
 

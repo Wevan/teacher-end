@@ -73,7 +73,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .antMatchers("/studentGlobalWay/insert")
                 .antMatchers("/demo")
                 .antMatchers("/student")
-                .antMatchers("/report/file")
+                .antMatchers("/report/down")
     }
 
     /**

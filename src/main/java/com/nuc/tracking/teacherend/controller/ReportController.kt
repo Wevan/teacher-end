@@ -21,21 +21,23 @@ class ReportController {
     private lateinit var restTemplate: RestTemplate
 
     @GetMapping("/file")
-    fun report() : ResponseEntity<InputStreamResource>{
-//        var url = "http://localhost:8085/demo?id=1713010101&type=2&courseId=9"
-//        val s = restTemplate.getForObject<String>(url)
-//        var file = File("E:/a/s.html")
-//        if (!file.exists()) {
-//            val parent = file.parent
-//            File(parent).apply {
-//                this.mkdir()
-//            }
-//        }
-//
-//        file.writeText(s!!)
-//
-//        var down = HtmlToPdf.tomPdf("E:/a/s.html", "E:/a/s.pdf")
-        var filePath="E:/a/s.pdf"
+    fun report(@RequestParam id: String, @RequestParam type: String, @RequestParam courseId: String) {
+        var url = "http://localhost:8085/demo?id=$id&type=$type&courseId=$courseId"
+        val s = restTemplate.getForObject<String>(url)
+        var file = File("E:/a/$id.html")
+        if (!file.exists()) {
+            val parent = file.parent
+            File(parent).apply {
+                this.mkdir()
+            }
+        }
+        file.writeText(s!!)
+        HtmlToPdf.tomPdf("E:/a/$id.html", "E:/a/$id.pdf")
+    }
+
+    @GetMapping("/down")
+    fun down(@RequestParam id: String): ResponseEntity<InputStreamResource>{
+        var filePath="E:/a/$id.pdf"
         val fileDown = FileSystemResource(filePath)
         val headers = HttpHeaders()
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate")
@@ -50,4 +52,5 @@ class ReportController {
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .body(InputStreamResource(fileDown.inputStream))
     }
+
 }

@@ -19,7 +19,4 @@ class StudentResource {
     var knowledgeId:Long =0
     var courseId: Long = 0
     var percent: Float = 0f
-    var clazzId: Long = 0
-    var chapterId: Long = 0
-    var resourceType:Long=0
 }

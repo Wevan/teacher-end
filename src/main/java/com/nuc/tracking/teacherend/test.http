@@ -54,3 +54,6 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTE0MDEwMzExIiwidXNlcklkIjoxNTU2LCJpYXQiOjE1NDgzMzQ1MTMsImV4cCI6MTU0ODkzOTMxM30.NbdXQldaW5Nh2xoaqvNwNBEit6Y0p6t30V6hLYLbGGg
 
 ###
+GET http://localhost:8085/report/down?id=1713010101
+
+###
