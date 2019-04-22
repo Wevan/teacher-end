@@ -7,7 +7,7 @@ import javax.persistence.*
  * 学生对知识点和日常考核方式的关系
  */
 @Entity
-@Table(name = "student_course")
+@Table(name = "nuc_tracking_student_course")
 @JsonIgnoreProperties(value = ["id"])
 class StudentCourse {
     @Id

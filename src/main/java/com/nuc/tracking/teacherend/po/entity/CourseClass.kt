@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 @Entity
-@Table(name = "uek_acdemic_course_class")
+@Table(name = "nuc_tracking_course_class")
 @JsonIgnoreProperties(value = ["id"])
 class CourseClass {
     @Id

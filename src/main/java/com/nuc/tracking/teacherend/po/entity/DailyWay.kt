@@ -7,7 +7,7 @@ import javax.persistence.*
  * 考核方式
  */
 @Entity
-@Table(name = "daily_way")
+@Table(name = "nuc_tracking_daily_way")
 @JsonIgnoreProperties(value = ["id"])
 class DailyWay {
     @Id

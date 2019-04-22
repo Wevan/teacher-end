@@ -7,7 +7,7 @@ import javax.persistence.*
  * 毕业要求和专业目标的关系表
  */
 @Entity
-@Table(name = "college_ability")
+@Table(name = "nuc_tracking_college_ability")
 @JsonIgnoreProperties(value = ["id"])
 class CollegeAndAbility {
     @Id

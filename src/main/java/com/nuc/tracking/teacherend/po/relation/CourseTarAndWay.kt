@@ -8,7 +8,7 @@ import javax.persistence.*
  * 同一课程的全局考核方式和需为1
  */
 @Entity
-@Table(name = "course_target_way")
+@Table(name = "nuc_tracking_course_target_way")
 @JsonIgnoreProperties(value = ["id"])
 class CourseTarAndWay {
     @Id

@@ -7,7 +7,7 @@ import javax.persistence.*
  * 考核方式 - 与特定的课程目标对应
  */
 @Entity
-@Table(name = "global_way")
+@Table(name = "nuc_tracking_global_way")
 @JsonIgnoreProperties(value = ["id"])
 class GlobalWay {
     @Id

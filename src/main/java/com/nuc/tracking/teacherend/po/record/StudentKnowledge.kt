@@ -7,7 +7,7 @@ import javax.persistence.*
  * 学生对知识点的掌握程度
  */
 @Entity
-@Table(name = "student_knowledge")
+@Table(name = "nuc_tracking_student_knowledge")
 @JsonIgnoreProperties(value = ["id"])
 class StudentKnowledge {
     @Id

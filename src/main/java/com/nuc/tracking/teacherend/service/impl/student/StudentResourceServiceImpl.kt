@@ -3,6 +3,7 @@ package com.nuc.tracking.teacherend.service.impl.student
 import com.nuc.tracking.teacherend.po.entity.Knowledge
 import com.nuc.tracking.teacherend.po.entity.Student
 import com.nuc.tracking.teacherend.po.record.*
+import com.nuc.tracking.teacherend.repository.StudentGraduateRepository
 import com.nuc.tracking.teacherend.repository.point.*
 import com.nuc.tracking.teacherend.repository.relation.CollegeAndAbilityRepository
 import com.nuc.tracking.teacherend.repository.relation.CourseAndCollegeRepository
@@ -52,6 +53,8 @@ class StudentResourceServiceImpl : StudentResourceService {
     private lateinit var collegeTargetRepository: CollegeTargetRepository
     @Autowired
     private lateinit var rAbilityRepository: RAbilityRepository
+    @Autowired
+    private lateinit var studentGraduateRepository: StudentGraduateRepository
 
     override fun save(studentResource: StudentResource) {
         studentResourceRepository.save(studentResource)
@@ -191,5 +194,24 @@ class StudentResourceServiceImpl : StudentResourceService {
 
             student12AbilityRepository.save(studentRAbility)
         }
+        /**
+         * 毕业达成度计算
+         * 学生毕业大程度记录表中的每条和其对应百分比成绩 累加之和
+         */
+        var studentGraduate=studentGraduateRepository.findByStudentId(studentResource.studentId)
+        if (studentGraduate==null){
+            studentGraduate=StudentGraduate()
+            studentGraduate.percent=0f
+            studentGraduate.studentId=studentResource.studentId
+        }
+        var student12Ability=student12AbilityRepository.findByStudentId(studentResource.studentId)
+        if (student12Ability!=null){
+            student12Ability.map {
+                studentGraduate.percent+=it.percent*
+                        rAbilityRepository.findById(it.abilityId).get().percent
+            }
+        }
+        println("毕业达成度为"+studentGraduate.percent)
+        studentGraduateRepository.save(studentGraduate)
     }
 }

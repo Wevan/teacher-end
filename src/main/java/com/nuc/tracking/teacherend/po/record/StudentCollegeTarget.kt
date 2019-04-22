@@ -7,7 +7,7 @@ import javax.persistence.*
  * 学生对专业目标的完成度
  */
 @Entity
-@Table(name = "student_college_target")
+@Table(name = "nuc_tracking_student_college_target")
 @JsonIgnoreProperties(value = ["id"])
 class StudentCollegeTarget {
     @Id

@@ -9,7 +9,7 @@ import javax.persistence.*
  * 同一课程的日常考核方式占比和需为1
  */
 @Entity
-@Table(name = "knowledge_way")
+@Table(name = "nuc_tracking_knowledge_way")
 @JsonIgnoreProperties(value = ["id"])
 class KnowledgeAndWay {
     @Id
