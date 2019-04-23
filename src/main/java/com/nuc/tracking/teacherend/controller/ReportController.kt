@@ -2,6 +2,7 @@ package com.nuc.tracking.teacherend.controller
 
 import com.google.common.collect.Maps
 import com.nuc.tracking.teacherend.util.HtmlToPdf
+import com.nuc.tracking.teacherend.util.PathUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.InputStreamResource
@@ -24,20 +25,24 @@ class ReportController {
     fun report(@RequestParam id: String, @RequestParam type: String, @RequestParam courseId: String) {
         var url = "http://localhost:8085/demo?id=$id&type=$type&courseId=$courseId"
         val s = restTemplate.getForObject<String>(url)
-        var file = File("E:/a/$id.html")
+        var filePath=PathUtils.rootPath()+"/tracking/$id.html"
+        println("ReportController file path $filePath")
+        var file = File(filePath)
         if (!file.exists()) {
             val parent = file.parent
+            println("File Parent is $parent")
             File(parent).apply {
                 this.mkdir()
             }
         }
         file.writeText(s!!)
-        HtmlToPdf.tomPdf("E:/a/$id.html", "E:/a/$id.pdf")
+        var downPath=PathUtils.rootPath()+"/tracking/$id.pdf"
+        HtmlToPdf.tomPdf(filePath, downPath)
     }
 
     @GetMapping("/down")
     fun down(@RequestParam id: String): ResponseEntity<InputStreamResource>{
-        var filePath="E:/a/$id.pdf"
+        var filePath=PathUtils.rootPath()+"/tracking/$id.pdf"
         val fileDown = FileSystemResource(filePath)
         val headers = HttpHeaders()
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate")

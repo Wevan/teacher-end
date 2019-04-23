@@ -90,10 +90,12 @@ class CourseClassServiceImpl:CourseClassService {
 
     override fun getStudentMesg(studentId: Long): PersonalRecord {
         var student=studentRepository.findByStudentNumber(studentId.toString())!!
-        var ids =clazzRepository.findById(student.classId).get()
+        var ids =clazzRepository.findById(student.classId!!).get()
+
+        println("student id $studentId, find student class ${student.classId},Course class ${ids.num}")
 
         //据sid查班级，据班级查课程list
-        var courseList= courseClassRepository.findByClassId(ids.num!!.toLong())
+        var courseList= courseClassRepository.findByClassId(student.classId!!)
 
         //记录课程达标的List
         var coursePercentList=HashMap<String, PersonalCourse>()
