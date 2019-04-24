@@ -15,6 +15,7 @@ import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import java.io.File
 
 @RestController
 @RequestMapping("/resource")
@@ -24,17 +25,28 @@ class FileController {
     @Autowired
     private lateinit var fileService: FileService
 
-    @PostMapping("/file")
-    fun fileUpload(@RequestBody file: MultipartFile, chapterId: Long, courseId: Long): Result {
-        logger.info("file is $file,$chapterId")
-        var resourceDirctoryFile = ResourceDirctoryFile()
-        resourceDirctoryFile.chapterId = chapterId
-        resourceDirctoryFile.courseId = courseId
-        resourceDirctoryFile.name = file.name
-        val flag = fileService.getFile(resourceDirctoryFile, file)
-        logger.info("result is $flag")
-        var list = fileService.findAll()
-        return ResultUtils.success(200, "file save success",list)
+    @RequestMapping("/file")
+    fun fileUpload(@RequestParam fileList: Array<MultipartFile>, chapterId: Long, courseId: Long): Result {
+        fileList.forEach {
+            logger.info("file ${it.originalFilename}")
+            var file = File("e:/${it.originalFilename}")
+            if (!file.exists()) {
+                val parent = file.parent
+                println("File Parent is $parent")
+                File(parent).apply {
+                    this.mkdir()
+                }
+            }
+            file.writeBytes(it.bytes)
+        }
+//        var resourceDirctoryFile = ResourceDirctoryFile()
+//        resourceDirctoryFile.chapterId = chapterId
+//        resourceDirctoryFile.courseId = courseId
+//        resourceDirctoryFile.name = file.name
+//        val flag = fileService.saveFile(resourceDirctoryFile, file)
+//        logger.info("result is $flag")
+//        var list = fileService.findAll()
+        return ResultUtils.success(200, "file save success")
     }
 
     @GetMapping("/list")
@@ -49,7 +61,7 @@ class FileController {
     fun deleteById(id: Long): Result {
         fileService.deleteById(id)
         var list = fileService.findAll()
-        return ResultUtils.success(200, "delete done",list)
+        return ResultUtils.success(200, "delete done", list)
     }
 
     @GetMapping("detail")
@@ -60,9 +72,9 @@ class FileController {
 
     @GetMapping("/downloadFile")
     fun downloadFile(id: Long): ResponseEntity<InputStreamResource> {
-        var resourceFile=fileService.findOne(id)
+        var resourceFile = fileService.findOne(id)
         val filePath = resourceFile.url
-        println("被下载的文件信息为"+filePath)
+        println("被下载的文件信息为" + filePath)
         val file = FileSystemResource(filePath)
         val headers = HttpHeaders()
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate")
@@ -80,7 +92,7 @@ class FileController {
 
     @GetMapping("/getPdf")
     fun getPdf(id: Long): ResponseEntity<InputStreamResource> {
-        var resourceFile=fileService.findOne(id)
+        var resourceFile = fileService.findOne(id)
         val filePath = resourceFile.url
         val file = FileSystemResource(filePath)
         val headers = HttpHeaders()
@@ -99,7 +111,7 @@ class FileController {
 
     @GetMapping("/getVideo")
     fun getVideo(id: Long): ResponseEntity<InputStreamResource> {
-        var resourceFile=fileService.findOne(id)
+        var resourceFile = fileService.findOne(id)
         val filePath = resourceFile.url
         val file = FileSystemResource(filePath)
         val headers = HttpHeaders()
@@ -107,7 +119,7 @@ class FileController {
         headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.filename))
         headers.add("Pragma", "no-cache")
         headers.add("Expires", "0")
-        println("video文件信息为"+filePath)
+        println("video文件信息为" + filePath)
 
         return ResponseEntity
                 .ok()

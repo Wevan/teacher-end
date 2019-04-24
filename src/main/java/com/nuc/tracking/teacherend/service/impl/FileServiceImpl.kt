@@ -30,7 +30,7 @@ class FileServiceImpl : FileService {
     private lateinit var fileRepository: FileRepository
 
     @Throws(Exception::class)
-    override fun getFile(resourceDirctoryFile: ResourceDirctoryFile, file: MultipartFile): Boolean {
+    override fun saveFile(resourceDirctoryFile: ResourceDirctoryFile, file: MultipartFile): Boolean {
 
         try {
             if (file.isEmpty) {

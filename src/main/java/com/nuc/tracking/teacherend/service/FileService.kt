@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile
 
 interface FileService {
     @Throws(ResultException::class)
-    fun getFile(resourceDirctoryFile: ResourceDirctoryFile, file: MultipartFile): Boolean
+    fun saveFile(resourceDirctoryFile: ResourceDirctoryFile, file: MultipartFile): Boolean
 
     @Throws(ResultException::class)
     fun deleteById(id: Long)

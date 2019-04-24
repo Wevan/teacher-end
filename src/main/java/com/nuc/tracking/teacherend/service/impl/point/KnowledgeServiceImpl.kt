@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service
 
 @Service
 class KnowledgeServiceImpl: KnowledgeService {
+    override fun findAllByCourseId(courseId: Long): List<Knowledge> {
+        return knowledgeRepository.findByCourseId(courseId)
+    }
+
     override fun findOne(id: Long): Knowledge {
-        val knowledge = knowledgeRepository.findById(id).get()
-        return knowledge
+        return knowledgeRepository.findById(id).get()
     }
 
     @Autowired
