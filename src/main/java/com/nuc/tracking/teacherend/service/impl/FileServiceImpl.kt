@@ -30,44 +30,66 @@ class FileServiceImpl : FileService {
     private lateinit var fileRepository: FileRepository
 
     @Throws(Exception::class)
-    override fun saveFile(resourceDirctoryFile: ResourceDirctoryFile, file: MultipartFile): Boolean {
+    override fun saveAllFile(resourceList: List<ResourceDirctoryFile>, type: Long, knowledgeId: Long): Boolean {
 
-        try {
-            if (file.isEmpty) {
-                return false
+//        try {
+//            if (file.isEmpty) {
+//                return false
+//            }
+//            // 获取文件名
+//            val fileName = file.originalFilename
+//            println("上传的文件名为：$fileName")
+//            // 获取文件的后缀名
+//            val suffixName = fileName.substring(fileName.lastIndexOf("."))
+//            println("文件的后缀名为：$suffixName")
+//            // 设置文件存储路径
+//            val docPath: String
+//            val os = System.getProperty("os.name")
+//            docPath = if (os.contains("Windows")) {
+//                "F:\\SX\\resource\\manager\\kj\\"
+//            } else {
+//                "~\\data\\resource\\manager\\kj\\"
+//            }
+//            val path = docPath + fileName
+//            val dest = File(path)
+////            // 检测是否存在目录
+//            if (!dest.parentFile.exists()) {
+//                dest.parentFile.mkdirs()
+//            }
+//            file.transferTo(dest)// 文件写入
+//            resourceDirctoryFile.name = fileName
+//            resourceDirctoryFile.url = path
+//            fileRepository.save(resourceDirctoryFile)
+//            return true
+//        } catch (e: IllegalStateException) {
+//            e.printStackTrace()
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//        }
+
+//        return false
+//        自动计算各部分平均百分比，需先查出所有的再做除法
+        if (type == 0L) {
+            var tempList = fileRepository.findByKnowledgeIdAndType(knowledgeId,type)
+            var list=ArrayList<ResourceDirctoryFile>()
+            if (tempList!=null){
+                list.addAll(tempList)
             }
-            // 获取文件名
-            val fileName = file.originalFilename
-            println("上传的文件名为：$fileName")
-            // 获取文件的后缀名
-            val suffixName = fileName.substring(fileName.lastIndexOf("."))
-            println("文件的后缀名为：$suffixName")
-            // 设置文件存储路径
-            val docPath: String
-            val os = System.getProperty("os.name")
-            docPath = if (os.contains("Windows")) {
-                "F:\\SX\\resource\\manager\\kj\\"
-            } else {
-                "~\\data\\resource\\manager\\kj\\"
+            list.addAll(resourceList)
+            val len=list.size
+            list.forEach {
+                it.percent=1.0f/len
+                println("Resource List ite ${it.name},${it.url},${it.percent},${it.type}")
             }
-            val path = docPath + fileName
-            val dest = File(path)
-//            // 检测是否存在目录
-            if (!dest.parentFile.exists()) {
-                dest.parentFile.mkdirs()
+            fileRepository.saveAll(list)
+        } else {
+            //普通资源只需要直接存储即可
+            resourceList.forEach {
+                println("else case ${it.name},${it.url},${it.percent},${it.type}")
             }
-            file.transferTo(dest)// 文件写入
-            resourceDirctoryFile.name = fileName
-            resourceDirctoryFile.url = path
-            fileRepository.save(resourceDirctoryFile)
-            return true
-        } catch (e: IllegalStateException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
+            fileRepository.saveAll(resourceList)
         }
-
-        return false
+        return true
     }
 }
 
