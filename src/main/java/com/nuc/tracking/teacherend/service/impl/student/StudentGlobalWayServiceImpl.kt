@@ -31,7 +31,7 @@ class StudentGlobalWayServiceImpl : StudentGlobalWayService {
 
         val workbook2 = WorkbookFactory.create(file.inputStream)
 
-        val sheet2 = workbook2.getSheet("sheet")
+        val sheet2 = workbook2.getSheetAt(0)
 
         val num = sheet2.lastRowNum
 

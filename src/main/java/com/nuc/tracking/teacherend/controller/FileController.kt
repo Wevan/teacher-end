@@ -74,7 +74,7 @@ class FileController {
         return ResultUtils.success(200, "delete done", list)
     }
 
-    @GetMapping("detail")
+    @GetMapping("/detail")
     fun findOne(id: Long): Result {
         val resource = fileService.findOne(id)
         return ResultUtils.success(200, "find one detail", resource)
