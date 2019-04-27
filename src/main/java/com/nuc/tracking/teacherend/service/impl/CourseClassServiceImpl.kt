@@ -58,7 +58,7 @@ class CourseClassServiceImpl:CourseClassService {
         classList.map {
 
             //it为每个班级,迭代每个班级，查出一个班的学生
-            var ids =clazzRepository.findByNum(it.classId.toString())
+            var ids =clazzRepository.findById(it.classId).get()
             var studentList=studentRepository.findByClassId(ids.id)
             var classRecord=ArrayList<StudentRecord>()
 

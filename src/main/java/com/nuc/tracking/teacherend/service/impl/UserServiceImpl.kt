@@ -62,12 +62,12 @@ class UserServiceImpl : UserService, UserDetailsService {
         authList.add(role)
 //        判断角色为教师
 
-        if (role.id==2L){
+        if (role.id == 2L) {
             val teacher = teacherRepository.findByJobNumber(user.username) ?: throw ResultException("用户查询失败", 500)
-            return jwtTokenProvider.createToken(authList,teacher)
-        }else if (role.id==3L){
+            return jwtTokenProvider.createToken(authList, teacher)
+        } else if (role.id == 3L) {
             val student = studentRepository.findByStudentNumber(user.username) ?: throw ResultException("用户查询失败", 500)
-            return jwtTokenProvider.createToken(authList,student)
+            return jwtTokenProvider.createToken(authList, student)
         }
         return ""
     }
@@ -79,14 +79,14 @@ class UserServiceImpl : UserService, UserDetailsService {
                 ?: throw UsernameNotFoundException("User '$username' not found")
 
         return org.springframework.security.core.userdetails.User//
-            .withUsername(username)//
-            .password(user.password)//
-            .authorities("STU")//
-            .accountExpired(false)//
-            .accountLocked(false)//
-            .credentialsExpired(false)//
-            .disabled(false)//
-            .build()
+                .withUsername(username)//
+                .password(user.password)//
+                .authorities("STU")//
+                .accountExpired(false)//
+                .accountLocked(false)//
+                .credentialsExpired(false)//
+                .disabled(false)//
+                .build()
     }
 }
 
