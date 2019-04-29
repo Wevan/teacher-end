@@ -1,7 +1,6 @@
 package com.nuc.tracking.teacherend.service.impl.student
 
 import com.nuc.tracking.teacherend.po.entity.Knowledge
-import com.nuc.tracking.teacherend.po.entity.Student
 import com.nuc.tracking.teacherend.po.record.*
 import com.nuc.tracking.teacherend.repository.StudentGraduateRepository
 import com.nuc.tracking.teacherend.repository.point.*
@@ -9,7 +8,6 @@ import com.nuc.tracking.teacherend.repository.relation.CollegeAndAbilityReposito
 import com.nuc.tracking.teacherend.repository.relation.CourseAndCollegeRepository
 import com.nuc.tracking.teacherend.repository.relation.CourseTarAndKnowledgeRepository
 import com.nuc.tracking.teacherend.repository.student.*
-import com.nuc.tracking.teacherend.service.point.CollegeTargetService
 import com.nuc.tracking.teacherend.service.student.StudentResourceService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -17,9 +15,13 @@ import java.sql.Date
 
 @Service
 class StudentResourceServiceImpl : StudentResourceService {
+    override fun findByResourceIdAndStudentId(resourceId: Long, studentId: Long): Boolean {
+        studentResourceRepository.findByResourceIdAndStudentId(resourceId,studentId) ?: return false
+        return true
+    }
+
     override fun findOne(id: Long): StudentResource {
-        val studentResource: StudentResource = studentResourceRepository.findById(id).get()
-        return studentResource
+        return studentResourceRepository.findById(id).get()
     }
 
     @Autowired
@@ -198,20 +200,20 @@ class StudentResourceServiceImpl : StudentResourceService {
          * 毕业达成度计算
          * 学生毕业大程度记录表中的每条和其对应百分比成绩 累加之和
          */
-        var studentGraduate=studentGraduateRepository.findByStudentId(studentResource.studentId)
-        if (studentGraduate==null){
-            studentGraduate=StudentGraduate()
-            studentGraduate.percent=0f
-            studentGraduate.studentId=studentResource.studentId
+        var studentGraduate = studentGraduateRepository.findByStudentId(studentResource.studentId)
+        if (studentGraduate == null) {
+            studentGraduate = StudentGraduate()
+            studentGraduate.percent = 0f
+            studentGraduate.studentId = studentResource.studentId
         }
-        var student12Ability=student12AbilityRepository.findByStudentId(studentResource.studentId)
-        if (student12Ability!=null){
+        var student12Ability = student12AbilityRepository.findByStudentId(studentResource.studentId)
+        if (student12Ability != null) {
             student12Ability.map {
-                studentGraduate.percent+=it.percent*
+                studentGraduate.percent += it.percent *
                         rAbilityRepository.findById(it.abilityId).get().percent
             }
         }
-        println("毕业达成度为"+studentGraduate.percent)
+        println("毕业达成度为" + studentGraduate.percent)
         studentGraduateRepository.save(studentGraduate)
     }
 }

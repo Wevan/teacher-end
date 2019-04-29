@@ -53,15 +53,19 @@ class UserServiceImpl : UserService, UserDetailsService {
      * @return token 信息
      * @throws ResultException 当用户名称和密码不一致
      */
-    override fun login(username: String, password: String): String {
-        authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, password))
+    override fun login(username: String, password: String, type: Long): String {
         val user = userRepository.findUserByUsername(username) ?: throw ResultException("没有该用户", 500)
         val userAndRole = userAndRoleRepository.findUserAndRoleByUserId(user.id)
         val role = roleRepository.findById(userAndRole.roleId).get()
+        if (!type.equals(role.id)){
+            println("权限问题$type,${role.id}")
+            throw ResultException("权限错误", 500)
+        }
+        authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, password))
+                ?: throw ResultException("密码错误", 500)
         val authList = ArrayList<Role>()
         authList.add(role)
 //        判断角色为教师
-
         if (role.id == 2L) {
             val teacher = teacherRepository.findByJobNumber(user.username) ?: throw ResultException("用户查询失败", 500)
             return jwtTokenProvider.createToken(authList, teacher)
@@ -69,6 +73,7 @@ class UserServiceImpl : UserService, UserDetailsService {
             val student = studentRepository.findByStudentNumber(user.username) ?: throw ResultException("用户查询失败", 500)
             return jwtTokenProvider.createToken(authList, student)
         }
+
         return ""
     }
 

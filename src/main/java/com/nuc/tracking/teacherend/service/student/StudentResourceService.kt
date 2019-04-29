@@ -9,4 +9,7 @@ interface StudentResourceService {
 
     @Throws(ResultException::class)
     fun findOne(id: Long): StudentResource
+
+    @Throws(ResultException::class)
+    fun findByResourceIdAndStudentId(resourceId: Long, studentId: Long): Boolean
 }

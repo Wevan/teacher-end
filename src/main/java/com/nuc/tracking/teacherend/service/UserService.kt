@@ -17,5 +17,5 @@ interface UserService {
      * @throws ResultException 当用户名称和密码不一致
      */
     @Throws(ResultException::class)
-    fun login(username: String, password: String): String
+    fun login(username: String, password: String, type: Long): String
 }

@@ -12,7 +12,8 @@ class Comment {
     var id: Long = 0
     var userId: Long = 0
     var videoId: Long = 0
-    var commentTime: java.sql.Timestamp? = null
-    var content: String? = null
+    var userName: String = ""
+    var commentTime: String? = null
+    var content: String = ""
 
 }

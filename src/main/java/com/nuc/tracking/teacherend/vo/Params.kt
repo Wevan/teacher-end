@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile
  * @param username 用户名
  * @param password 密码
  */
-data class User(val username: String, val password: String)
+data class User(val username: String, val password: String, val type: Long)
 
 class ResourceData() {
     lateinit var resourceDirctoryFile: ResourceDirctoryFile

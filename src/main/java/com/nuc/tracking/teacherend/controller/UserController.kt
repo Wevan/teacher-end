@@ -28,7 +28,7 @@ class UserController {
      */
     @PostMapping("/login")
     fun login(@RequestBody user: User): Result {
-        val token = userService.login(user.username, user.password)
+        val token = userService.login(user.username, user.password, user.type)
         return ResultUtils.success(200, "登录成功", token)
     }
 
