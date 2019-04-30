@@ -34,7 +34,6 @@ class FileController {
             logger.info("file ${it.originalFilename}")
             val filePath = PathUtils.rootPath() + "/refile/${it.originalFilename}"
             val file = File(filePath)
-//            var file = File("e:/${it.originalFilename}")
             if (!file.exists()) {
                 val parent = file.parent
                 println("File Parent is $parent")
@@ -51,11 +50,8 @@ class FileController {
             resourceDirctoryFile.url = filePath
             resourceDirctoryFile.addtime = Date(System.currentTimeMillis()).toString()
             resourceList.add(resourceDirctoryFile)
-//            fileService.saveAllFile(resourceDirctoryFile,type,knowledgeId)
         }
         fileService.saveAllFile(resourceList,type,knowledgeId)
-//        logger.info("result is $flag")
-//        var list = fileService.findAll()
         return ResultUtils.success(200, "file save success")
     }
 

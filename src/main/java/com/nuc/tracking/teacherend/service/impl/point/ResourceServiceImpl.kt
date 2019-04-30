@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service
 @Service
 class ResourceServiceImpl: ResourceService {
     override fun findOne(id: Long): ResourceDirctoryFile {
-        val resource = resourceRepository.findById(id).get()
-        return resource
+        return resourceRepository.findById(id).get()
     }
 
     @Autowired
