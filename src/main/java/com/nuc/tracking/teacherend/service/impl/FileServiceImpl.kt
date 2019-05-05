@@ -1,7 +1,9 @@
 package com.nuc.tracking.teacherend.service.impl
 
 import com.nuc.tracking.teacherend.po.entity.ResourceDirctoryFile
+import com.nuc.tracking.teacherend.po.entity.ResourceEntity
 import com.nuc.tracking.teacherend.repository.FileRepository
+import com.nuc.tracking.teacherend.repository.ResourceClassRepository
 import com.nuc.tracking.teacherend.service.FileService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -13,6 +15,10 @@ import java.io.IOException
 @Service
 class FileServiceImpl : FileService {
 
+    @Autowired
+    private lateinit var fileRepository: FileRepository
+    @Autowired
+    private lateinit var resourceClassRepository: ResourceClassRepository
 
     override fun deleteById(id: Long) {
         fileRepository.deleteById(id)
@@ -22,63 +28,37 @@ class FileServiceImpl : FileService {
         return fileRepository.findById(id).get()
     }
 
-    override fun findAll(): List<ResourceDirctoryFile> {
-        return fileRepository.findAll()
-    }
+    override fun findAll(courseId: Long): List<ResourceEntity>? {
+        var fileList = fileRepository.findByCourseId(courseId)
+        var resultList = ArrayList<ResourceEntity>()
+        fileList?.map {
+            var ent = resourceClassRepository.findByResourceIdAndClassId(it.id, courseId)
+            var resourceEntity = ResourceEntity()
+            if (ent !== null) {
+                resourceEntity.resourceClass = ent
+            }
+            resourceEntity.resourceDirctoryFile = it
+            resultList.add(resourceEntity)
+            return@map
+        }
 
-    @Autowired
-    private lateinit var fileRepository: FileRepository
+        return resultList
+    }
 
     @Throws(Exception::class)
     override fun saveAllFile(resourceList: List<ResourceDirctoryFile>, type: Long, knowledgeId: Long): Boolean {
 
-//        try {
-//            if (file.isEmpty) {
-//                return false
-//            }
-//            // 获取文件名
-//            val fileName = file.originalFilename
-//            println("上传的文件名为：$fileName")
-//            // 获取文件的后缀名
-//            val suffixName = fileName.substring(fileName.lastIndexOf("."))
-//            println("文件的后缀名为：$suffixName")
-//            // 设置文件存储路径
-//            val docPath: String
-//            val os = System.getProperty("os.name")
-//            docPath = if (os.contains("Windows")) {
-//                "F:\\SX\\resource\\manager\\kj\\"
-//            } else {
-//                "~\\data\\resource\\manager\\kj\\"
-//            }
-//            val path = docPath + fileName
-//            val dest = File(path)
-////            // 检测是否存在目录
-//            if (!dest.parentFile.exists()) {
-//                dest.parentFile.mkdirs()
-//            }
-//            file.transferTo(dest)// 文件写入
-//            resourceDirctoryFile.name = fileName
-//            resourceDirctoryFile.url = path
-//            fileRepository.save(resourceDirctoryFile)
-//            return true
-//        } catch (e: IllegalStateException) {
-//            e.printStackTrace()
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        }
-
-//        return false
 //        自动计算各部分平均百分比，需先查出所有的再做除法
         if (type == 0L) {
-            var tempList = fileRepository.findByKnowledgeIdAndType(knowledgeId,type)
-            var list=ArrayList<ResourceDirctoryFile>()
-            if (tempList!=null){
+            var tempList = fileRepository.findByKnowledgeIdAndType(knowledgeId, type)
+            var list = ArrayList<ResourceDirctoryFile>()
+            if (tempList != null) {
                 list.addAll(tempList)
             }
             list.addAll(resourceList)
-            val len=list.size
+            val len = list.size
             list.forEach {
-                it.percent=1.0f/len
+                it.percent = 1.0f / len
                 println("Resource List ite ${it.name},${it.url},${it.percent},${it.type}")
             }
             fileRepository.saveAll(list)

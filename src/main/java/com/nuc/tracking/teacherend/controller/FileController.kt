@@ -51,7 +51,7 @@ class FileController {
             resourceDirctoryFile.addtime = Date(System.currentTimeMillis()).toString()
             resourceList.add(resourceDirctoryFile)
         }
-        fileService.saveAllFile(resourceList,type,knowledgeId)
+        fileService.saveAllFile(resourceList, type, knowledgeId)
         return ResultUtils.success(200, "file save success")
     }
 
@@ -59,14 +59,15 @@ class FileController {
     fun getList(courseId: Long): Result {
         logger.info("getList is $courseId")
 
-        val list = fileService.findAll()
+        val list = fileService.findAll(courseId)
         return ResultUtils.success(200, "get list suc", list)
     }
 
     @DeleteMapping("/deleteOne")
     fun deleteById(id: Long): Result {
         fileService.deleteById(id)
-        val list = fileService.findAll()
+        val courseId = fileService.findOne(id).courseId
+        val list = fileService.findAll(courseId)
         return ResultUtils.success(200, "delete done", list)
     }
 

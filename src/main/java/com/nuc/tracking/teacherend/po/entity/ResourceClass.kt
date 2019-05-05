@@ -1,18 +1,21 @@
 package com.nuc.tracking.teacherend.po.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
+
+/**
+ * 资源对该班级应该完成的时间段
+ */
 @Entity
-@Table(name = "nuc_tracking_course_class")
-@JsonIgnoreProperties(value = ["id"])
-class CourseClass {
+@Table(name = "nuc_tracking_resource_class")
+class ResourceClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
-    var teacherId: Long = 0
     var classId: Long = 0
+    var resourceId: Long = 0
     var courseId: Long = 0
+    var knowledgeId:Long = 0
     var startTime: String = ""
     var endTime: String = ""
 }

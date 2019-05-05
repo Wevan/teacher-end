@@ -2,11 +2,12 @@ package com.nuc.tracking.teacherend.service
 
 import com.nuc.tracking.teacherend.exception.ResultException
 import com.nuc.tracking.teacherend.po.entity.ResourceDirctoryFile
+import com.nuc.tracking.teacherend.po.entity.ResourceEntity
 import org.springframework.web.multipart.MultipartFile
 
 interface FileService {
     @Throws(ResultException::class)
-    fun saveAllFile(resourceList: List<ResourceDirctoryFile>,type:Long, knowledgeId: Long): Boolean
+    fun saveAllFile(resourceList: List<ResourceDirctoryFile>, type: Long, knowledgeId: Long): Boolean
 
     @Throws(ResultException::class)
     fun deleteById(id: Long)
@@ -15,7 +16,7 @@ interface FileService {
     fun findOne(id: Long): ResourceDirctoryFile
 
     @Throws(ResultException::class)
-    fun findAll(): List<ResourceDirctoryFile>
+    fun findAll(courseId: Long): List<ResourceEntity>?
 
 
 }

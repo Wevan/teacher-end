@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface FileRepository : JpaRepository<ResourceDirctoryFile, Long> {
-    fun findByKnowledgeIdAndType(knowledgeId: Long,type:Long): List<ResourceDirctoryFile>?
+    fun findByKnowledgeIdAndType(knowledgeId: Long, type: Long): List<ResourceDirctoryFile>?
+    fun findByCourseId(courseId: Long): List<ResourceDirctoryFile>?
 
 }

@@ -4,6 +4,10 @@ import com.nuc.tracking.teacherend.po.pport.PersonalAbility
 import com.nuc.tracking.teacherend.po.pport.PersonalCollegeTarget
 import com.nuc.tracking.teacherend.po.pport.PersonalCourse
 
+/**
+ * 返回前端的个人纪录
+ */
+
 class PersonalRecord {
     var name: String=""
     var classId: String=""
