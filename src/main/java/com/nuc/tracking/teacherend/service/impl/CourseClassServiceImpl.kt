@@ -1,5 +1,6 @@
 package com.nuc.tracking.teacherend.service.impl
 
+import com.nuc.tracking.teacherend.po.entity.CourseClass
 import com.nuc.tracking.teacherend.po.entity.PersonalRecord
 import com.nuc.tracking.teacherend.po.entity.StudentRecord
 import com.nuc.tracking.teacherend.po.pport.PersonalAbility
@@ -27,6 +28,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class CourseClassServiceImpl:CourseClassService {
+    override fun findAllByTeacherIdAndCourseId(teacherId: Long, courseId: Long): List<CourseClass> {
+        return courseClassRepository.findByCourseIdAndTeacherId(courseId, teacherId)
+    }
 
     @Autowired
     private lateinit var courseClassRepository: CourseClassRepository
@@ -185,4 +189,6 @@ class CourseClassServiceImpl:CourseClassService {
         return personalRecord
 
     }
+
+
 }

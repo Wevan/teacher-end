@@ -16,7 +16,11 @@ interface FileService {
     fun findOne(id: Long): ResourceDirctoryFile
 
     @Throws(ResultException::class)
-    fun findAll(courseId: Long): List<ResourceEntity>?
+    fun findAll(courseId: Long, classId: Long): List<ResourceEntity>?
+//
+//    @Throws(ResultException::class)
+//    fun findTeacherAll(courseId: Long): List<ResourceEntity>?
 
-
+    @Throws(ResultException::class)
+    fun playTimes(resourceId: Long)
 }

@@ -15,6 +15,13 @@ import java.io.IOException
 @Service
 class FileServiceImpl : FileService {
 
+    override fun playTimes(resourceId: Long) {
+        var item: ResourceDirctoryFile = fileRepository.findById(resourceId).get()
+        item.playTimes += 1
+        println("$resourceId PlayTimes update ${item.name},${item.playTimes}")
+        fileRepository.save(item)
+    }
+
     @Autowired
     private lateinit var fileRepository: FileRepository
     @Autowired
@@ -28,11 +35,11 @@ class FileServiceImpl : FileService {
         return fileRepository.findById(id).get()
     }
 
-    override fun findAll(courseId: Long): List<ResourceEntity>? {
+    override fun findAll(courseId: Long, classId: Long): List<ResourceEntity>? {
         var fileList = fileRepository.findByCourseId(courseId)
         var resultList = ArrayList<ResourceEntity>()
         fileList?.map {
-            var ent = resourceClassRepository.findByResourceIdAndClassId(it.id, courseId)
+            var ent = resourceClassRepository.findByResourceIdAndClassId(it.id, classId)
             var resourceEntity = ResourceEntity()
             if (ent !== null) {
                 resourceEntity.resourceClass = ent

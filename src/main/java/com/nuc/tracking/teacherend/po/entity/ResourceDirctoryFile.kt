@@ -21,5 +21,6 @@ class ResourceDirctoryFile {
     var courseId: Long = 0
     var chapterId: Long = 0
     var knowledgeId: Long = 0
+    var playTimes: Int = 0
 
 }

@@ -56,18 +56,17 @@ class FileController {
     }
 
     @GetMapping("/list")
-    fun getList(courseId: Long): Result {
-        logger.info("getList is $courseId")
-
-        val list = fileService.findAll(courseId)
+    fun getList(courseId: Long, classId: Long): Result {
+        logger.info("getList is $courseId,classId is $classId")
+        val list = fileService.findAll(courseId, classId)
         return ResultUtils.success(200, "get list suc", list)
     }
 
     @DeleteMapping("/deleteOne")
-    fun deleteById(id: Long): Result {
+    fun deleteById(id: Long, classId: Long): Result {
         fileService.deleteById(id)
         val courseId = fileService.findOne(id).courseId
-        val list = fileService.findAll(courseId)
+        val list = fileService.findAll(courseId, classId)
         return ResultUtils.success(200, "delete done", list)
     }
 
@@ -134,6 +133,13 @@ class FileController {
                 .contentLength(file.contentLength())
                 .contentType(MediaType.parseMediaType("video/mp4"))
                 .body(InputStreamResource(file.inputStream))
+    }
+
+    @GetMapping("/playTimes")
+    fun playTimes(id: Long): Result {
+        println("Get playtime id is $id")
+        fileService.playTimes(id)
+        return ResultUtils.success(200, "播放量更新成功")
     }
 
 }

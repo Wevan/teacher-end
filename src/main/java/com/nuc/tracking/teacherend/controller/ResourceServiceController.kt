@@ -12,7 +12,7 @@ class ResourceServiceController {
     private lateinit var resourceClassService: ResourceClassService
 
     @PostMapping("/insert")
-    fun report(@RequestBody resourceClass: ResourceClass) {
+    fun insert(@RequestBody resourceClass: ResourceClass) {
         resourceClassService.saveOne(resourceClass)
     }
 }
