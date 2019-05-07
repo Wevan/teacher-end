@@ -17,9 +17,9 @@ interface FileService {
 
     @Throws(ResultException::class)
     fun findAll(courseId: Long, classId: Long): List<ResourceEntity>?
-//
-//    @Throws(ResultException::class)
-//    fun findTeacherAll(courseId: Long): List<ResourceEntity>?
+
+    @Throws(ResultException::class)
+    fun getTqPercent(courseId: Long, classId: Long): Float
 
     @Throws(ResultException::class)
     fun playTimes(resourceId: Long)

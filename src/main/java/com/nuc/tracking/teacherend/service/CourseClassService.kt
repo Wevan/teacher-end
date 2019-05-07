@@ -15,4 +15,7 @@ interface CourseClassService {
 
     @Throws(ResultException::class)
     fun findAllByTeacherIdAndCourseId(teacherId: Long, courseId: Long): List<CourseClass>
+
+    @Throws(ResultException::class)
+    fun findAllByCourseIdAndClassId(courseId: Long, classId: Long): List<CourseClass>
 }

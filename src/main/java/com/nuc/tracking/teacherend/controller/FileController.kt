@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
 import java.sql.Date
+import java.sql.Timestamp
 
 @RestController
 @RequestMapping("/resource")
@@ -48,7 +49,7 @@ class FileController {
             resourceDirctoryFile.name = it.originalFilename
             resourceDirctoryFile.type = type
             resourceDirctoryFile.url = filePath
-            resourceDirctoryFile.addtime = Date(System.currentTimeMillis()).toString()
+            resourceDirctoryFile.addtime = Timestamp(System.currentTimeMillis())
             resourceList.add(resourceDirctoryFile)
         }
         fileService.saveAllFile(resourceList, type, knowledgeId)
@@ -142,4 +143,9 @@ class FileController {
         return ResultUtils.success(200, "播放量更新成功")
     }
 
+    @GetMapping("/getTqPercent")
+    fun getTqPercent(courseId: Long, classId: Long): Result {
+        val msg = fileService.getTqPercent(courseId, classId)
+        return ResultUtils.success(200, "获取同期达标度成功", msg)
+    }
 }

@@ -5,12 +5,14 @@ import com.nuc.tracking.teacherend.repository.ResourceClassRepository
 import com.nuc.tracking.teacherend.service.ResourceClassService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class ResourceClassServiceImpl : ResourceClassService {
-    override fun findOne(resourceId: Long, classId: Long) {
-        resouceClassRepository.findByResourceIdAndClassId(resourceId, classId)
+    override fun saveAll(resourceClassList: List<ResourceClass>) {
+        resouceClassRepository.saveAll(resourceClassList)
     }
+
 
     @Autowired
     private lateinit var resouceClassRepository: ResourceClassRepository

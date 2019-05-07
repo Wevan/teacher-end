@@ -16,6 +16,6 @@ class ResourceClass {
     var resourceId: Long = 0
     var courseId: Long = 0
     var knowledgeId:Long = 0
-    var startTime: String = ""
-    var endTime: String = ""
+    var startTime: Long = 0
+    var endTime: Long = 0
 }

@@ -1,6 +1,7 @@
 package com.nuc.tracking.teacherend.po.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import java.sql.Timestamp
 import javax.persistence.*
 
 @Entity
@@ -13,7 +14,7 @@ class ResourceDirctoryFile {
 
     var name: String? = null
     var pid: Long = 0
-    var addtime: String? = null
+    var addtime: Timestamp? = null
     var url: String? = null
     var type: Long = 0
     var size: String? = null
@@ -21,6 +22,7 @@ class ResourceDirctoryFile {
     var courseId: Long = 0
     var chapterId: Long = 0
     var knowledgeId: Long = 0
+    var tq_percent: Float = 0f
     var playTimes: Int = 0
 
 }

@@ -8,5 +8,8 @@ interface ResourceClassService {
     fun saveOne(resouceClass: ResourceClass)
 
     @Throws(ResultException::class)
-    fun findOne(resourceId: Long, classId: Long)
+    fun saveAll(resourceClassList: List<ResourceClass>)
+
+
+
 }

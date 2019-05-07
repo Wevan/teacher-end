@@ -28,6 +28,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class CourseClassServiceImpl:CourseClassService {
+    override fun findAllByCourseIdAndClassId(courseId: Long, classId: Long): List<CourseClass> {
+        return courseClassRepository.findByCourseIdAndClassId(courseId, classId)
+    }
+
     override fun findAllByTeacherIdAndCourseId(teacherId: Long, courseId: Long): List<CourseClass> {
         return courseClassRepository.findByCourseIdAndTeacherId(courseId, teacherId)
     }

@@ -49,4 +49,5 @@ class CourseController {
         val msg=courseService.findByLevel(level)
         return ResultUtils.success(200,"查找成功",msg)
     }
+
 }
