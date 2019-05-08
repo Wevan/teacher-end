@@ -1,9 +1,12 @@
 package com.nuc.tracking.teacherend.controller
 
 
+import com.nuc.tracking.teacherend.po.entity.CoursePersonal
 import com.nuc.tracking.teacherend.po.entity.ResourceDirctoryFile
+import com.nuc.tracking.teacherend.repository.student.StudentCourseRepository
 import com.nuc.tracking.teacherend.result.Result
 import com.nuc.tracking.teacherend.service.FileService
+import com.nuc.tracking.teacherend.service.student.StudentCourseService
 import com.nuc.tracking.teacherend.util.PathUtils
 import com.nuc.tracking.teacherend.util.ResultUtils
 import org.slf4j.Logger
@@ -27,6 +30,8 @@ class FileController {
     private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
     @Autowired
     private lateinit var fileService: FileService
+    @Autowired
+    private lateinit var studentCourseRepository: StudentCourseRepository
 
     @RequestMapping("/file")
     fun fileUpload(@RequestParam fileList: Array<MultipartFile>, knowledgeId: Long, courseId: Long, type: Long): Result {
@@ -64,11 +69,10 @@ class FileController {
     }
 
     @DeleteMapping("/deleteOne")
-    fun deleteById(id: Long, classId: Long): Result {
-        fileService.deleteById(id)
-        val courseId = fileService.findOne(id).courseId
-        val list = fileService.findAll(courseId, classId)
-        return ResultUtils.success(200, "delete done", list)
+    fun deleteById(id: Long, type: Long, knowledgeId: Long): Result {
+        println("Delete get knowledgeId $knowledgeId,type $type,id $id")
+        fileService.deleteById(id, type, knowledgeId)
+        return ResultUtils.success(200, "delete done")
     }
 
     @GetMapping("/detail")
@@ -143,9 +147,17 @@ class FileController {
         return ResultUtils.success(200, "播放量更新成功")
     }
 
+    /**
+     * 此处的studentId为1713010101型
+     */
     @GetMapping("/getTqPercent")
-    fun getTqPercent(courseId: Long, classId: Long): Result {
-        val msg = fileService.getTqPercent(courseId, classId)
+    fun getTqPercent(courseId: Long, classId: Long, studentId: Long): Result {
+        val msg = CoursePersonal()
+        msg.tqPercent = fileService.getTqPercent(courseId, classId)
+        val percent = studentCourseRepository.findByCourseIdAndStudentId(courseId, studentId)?.percent
+        if (percent != null) {
+            msg.selfPercent = percent
+        }
         return ResultUtils.success(200, "获取同期达标度成功", msg)
     }
 }

@@ -10,7 +10,7 @@ interface FileService {
     fun saveAllFile(resourceList: List<ResourceDirctoryFile>, type: Long, knowledgeId: Long): Boolean
 
     @Throws(ResultException::class)
-    fun deleteById(id: Long)
+    fun deleteById(id: Long, type: Long, knowledgeId: Long)
 
     @Throws(ResultException::class)
     fun findOne(id: Long): ResourceDirctoryFile
