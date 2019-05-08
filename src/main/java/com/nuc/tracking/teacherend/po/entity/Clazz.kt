@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "uek_acdemic_class")
-@JsonIgnoreProperties(value = ["id"])
+//@JsonIgnoreProperties(value = ["id"])
 
 class Clazz {
     @Id

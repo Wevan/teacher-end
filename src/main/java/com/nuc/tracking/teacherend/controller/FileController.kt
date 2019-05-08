@@ -160,4 +160,13 @@ class FileController {
         }
         return ResultUtils.success(200, "获取同期达标度成功", msg)
     }
+
+    /**
+     * 获得单门课程的同期达标度
+     */
+    @GetMapping("/getCourseTqPercent")
+    fun getCourseTqPercent(courseId: Long, classId: Long): Result {
+        val msg =  fileService.getTqPercent(courseId, classId)
+        return ResultUtils.success(200, "获取同期达标度成功", msg)
+    }
 }

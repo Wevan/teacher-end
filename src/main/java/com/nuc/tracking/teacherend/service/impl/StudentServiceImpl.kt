@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class StudentServiceImpl:StudentService {
+class StudentServiceImpl : StudentService {
+    override fun findAllByClassId(classId: Long): List<Student> {
+        return studentRepository.findByClassId(classId)
+    }
+
     override fun findOne(id: String): Student {
         return studentRepository.findByStudentNumber(id)!!
     }

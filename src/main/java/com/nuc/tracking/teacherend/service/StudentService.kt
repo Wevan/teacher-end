@@ -5,5 +5,8 @@ import com.nuc.tracking.teacherend.po.entity.Student
 
 interface StudentService {
     @Throws(ResultException::class)
-    fun findOne(id:String): Student
+    fun findOne(id: String): Student
+
+    @Throws(ResultException::class)
+    fun findAllByClassId(classId: Long): List<Student>
 }
