@@ -8,6 +8,14 @@ import org.springframework.stereotype.Service
 
 @Service
 class RAbilityServiceImpl:RAbilityService {
+    override fun findByCollegeId(collegeId: Long): List<RAbility>? {
+        return rAbilityRepository.findByCollegeId(collegeId)
+    }
+
+    override fun getAll(id: Long): List<RAbility> {
+        return rAbilityRepository.findAll()
+    }
+
     override fun findOne(id: Long): RAbility {
         val rAbility = rAbilityRepository.findById(id).get()
         return rAbility
@@ -15,7 +23,7 @@ class RAbilityServiceImpl:RAbilityService {
 
     @Autowired
     private lateinit var rAbilityRepository: RAbilityRepository
-    override fun save(rAbility: RAbility) {
-        rAbilityRepository.save(rAbility)
+    override fun save(ability: RAbility) {
+        rAbilityRepository.save(ability)
     }
 }

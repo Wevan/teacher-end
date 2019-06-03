@@ -25,5 +25,7 @@ class Student {
     var memberId: Long? = 0
     var userId: Long = 0
     var classId: Long? = 0
+    var collegeId: Long = 0
+    var directionId: Long = 0
 
 }

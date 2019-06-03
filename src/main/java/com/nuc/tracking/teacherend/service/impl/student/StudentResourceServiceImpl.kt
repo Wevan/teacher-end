@@ -16,7 +16,7 @@ import java.sql.Date
 @Service
 class StudentResourceServiceImpl : StudentResourceService {
     override fun findByResourceIdAndStudentId(resourceId: Long, studentId: Long): Boolean {
-        studentResourceRepository.findByResourceIdAndStudentId(resourceId,studentId) ?: return false
+        studentResourceRepository.findByResourceIdAndStudentId(resourceId, studentId) ?: return false
         return true
     }
 
@@ -57,6 +57,9 @@ class StudentResourceServiceImpl : StudentResourceService {
     private lateinit var rAbilityRepository: RAbilityRepository
     @Autowired
     private lateinit var studentGraduateRepository: StudentGraduateRepository
+
+    @Autowired
+    private lateinit var courseRepository: CourseRepository
 
     override fun save(studentResource: StudentResource) {
         studentResourceRepository.save(studentResource)
@@ -162,40 +165,41 @@ class StudentResourceServiceImpl : StudentResourceService {
          * 毕业目标达成度+= 对应的专业目标达成度*毕业目标占比
          * studentCollegeTargetList 上一部分计算所得的学生专业目标列表
          */
-
+        var collegeId = courseRepository.findById(studentResource.courseId).get().collegeId
         println("毕业目标达成度+= 对应的专业目标达成度*专业目标之间的占比*毕业目标占比")
-        var student12AbilityList = rAbilityRepository.findAll()
-
-        //毕业目标列表
-        student12AbilityList.map { item2 ->
-
-            var studentRAbility = student12AbilityRepository.findByStudentIdAndAbilityId(
-                    studentResource.studentId, item2.id
-            )
-            if (studentRAbility == null) {
-                studentRAbility = Student12Ability()
-                studentRAbility.studentId = studentResource.studentId
-                studentRAbility.abilityId = item2.id
-            }
+        var student12AbilityList = rAbilityRepository.findByCollegeId(collegeId)
+        if (student12AbilityList!=null){
+            student12AbilityList.map { item2 ->
+                var studentRAbility = student12AbilityRepository.findByStudentIdAndAbilityId(
+                        studentResource.studentId, item2.id
+                )
+                if (studentRAbility == null) {
+                    studentRAbility = Student12Ability()
+                    studentRAbility.studentId = studentResource.studentId
+                    studentRAbility.abilityId = item2.id
+                }
 //            专业目标列表
-            studentCollegeTargetList.forEach { item ->
-                studentRAbility.date = Date(System.currentTimeMillis()).toString()
-                //初始化存储对象
+                studentCollegeTargetList.forEach { item ->
+                    studentRAbility.date = Date(System.currentTimeMillis()).toString()
+                    //初始化存储对象
 
-                var relation = collegeAndAbilityRepository.findByCollegeTargetIdAndAbilityId(item.collegeTargetId, item2.id)
+                    var relation = collegeAndAbilityRepository.findByCollegeTargetIdAndAbilityId(item.collegeTargetId, item2.id)
 
-                if (relation != null) {
-                    relation.map { item1 ->
-                        studentRAbility.percent += item.percent * collegeTargetRepository.findById(item.collegeTargetId).get().percent * item1.percent
-                        studentRAbility.tqPercent += item.tqPercent * item1.percent * collegeTargetRepository.findById(item.collegeTargetId).get().percent
-                        println("" + item.percent + "*" + item1.percent + "*" + collegeTargetRepository.findById(item.collegeTargetId).get().percent + "=" + studentRAbility.percent)
-                        println()
+                    if (relation != null) {
+                        relation.map { item1 ->
+                            studentRAbility.percent += item.percent * collegeTargetRepository.findById(item.collegeTargetId).get().percent * item1.percent
+                            studentRAbility.tqPercent += item.tqPercent * item1.percent * collegeTargetRepository.findById(item.collegeTargetId).get().percent
+                            println("" + item.percent + "*" + item1.percent + "*" + collegeTargetRepository.findById(item.collegeTargetId).get().percent + "=" + studentRAbility.percent)
+                            println()
+                        }
                     }
                 }
-            }
 
-            student12AbilityRepository.save(studentRAbility)
+                student12AbilityRepository.save(studentRAbility)
+            }
         }
+        //毕业目标列表
+
         /**
          * 毕业达成度计算
          * 学生毕业大程度记录表中的每条和其对应百分比成绩 累加之和

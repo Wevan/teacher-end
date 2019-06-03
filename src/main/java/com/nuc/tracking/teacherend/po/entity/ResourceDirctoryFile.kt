@@ -14,7 +14,7 @@ class ResourceDirctoryFile {
 
     var name: String? = null
     var pid: Long = 0
-    var addtime: Timestamp? = null
+    var addtime: Long? = null
     var url: String? = null
     var type: Long = 0
     var size: String? = null

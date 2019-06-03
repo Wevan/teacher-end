@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface RAbilityRepository: JpaRepository<RAbility, Long> {
+    fun findByCollegeId(collegeId: Long): List<RAbility>?
 }

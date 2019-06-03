@@ -27,8 +27,9 @@ class KnowledgeController {
     }
 
     @GetMapping("/findByCourse")
-    fun findByLevel(courseId:Long):Result{
+    fun findByCourse(courseId:Long):Result{
         val msg=knowledgeService.findAllByCourseId(courseId)
         return ResultUtils.success(200,"查找成功",msg)
     }
+
 }
