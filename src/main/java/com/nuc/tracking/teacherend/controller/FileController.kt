@@ -54,7 +54,7 @@ class FileController {
             resourceDirctoryFile.name = it.originalFilename
             resourceDirctoryFile.type = type
             resourceDirctoryFile.url = filePath
-            resourceDirctoryFile.addtime = Timestamp(System.currentTimeMillis())
+            resourceDirctoryFile.addtime = System.currentTimeMillis()
             resourceList.add(resourceDirctoryFile)
         }
         fileService.saveAllFile(resourceList, type, knowledgeId)

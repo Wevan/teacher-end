@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.sql.Date
+import java.sql.Timestamp
 
 @RestController
 @RequestMapping("/sturesource")
@@ -37,7 +38,7 @@ class StudentResourceController {
         resourceLog.resourceId = studentResource.resourceId
         resourceLog.name = fileService.findOne(studentResource.resourceId).name
         resourceLog.studentId = studentRepository.findByStudentNumber(studentResource.studentId.toString())!!.userId
-        resourceLog.time = Date(System.currentTimeMillis()).time
+        resourceLog.time = Timestamp(System.currentTimeMillis())
         resourceLogService.saveOne(resourceLog)
         return ResultUtils.success(200, "插入记录成功", msg)
     }
