@@ -12,5 +12,5 @@ interface ResourceRepository : JpaRepository<ResourceDirctoryFile, Long> {
      * @param name String
      * @return List<ResourceDirctoryFile>
      */
-    fun findByNameLike(name:String):List<ResourceDirctoryFile>
+    fun findByNameLikeAndType(name: String, type: Long): List<ResourceDirctoryFile>
 }

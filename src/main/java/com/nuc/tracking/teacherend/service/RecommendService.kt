@@ -1,5 +1,6 @@
 package com.nuc.tracking.teacherend.service
 
+import com.nuc.tracking.teacherend.vo.RecommendResource
 import org.springframework.stereotype.Service
 
 /**
@@ -11,5 +12,5 @@ interface RecommendService {
     /**
      * 生成推荐
      */
-    fun generateRecommend(studentId:Long)
+    fun generateRecommend(studentId:Long):HashSet<RecommendResource>
 }

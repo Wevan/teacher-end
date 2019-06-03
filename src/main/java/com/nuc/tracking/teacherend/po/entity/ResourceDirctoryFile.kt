@@ -17,6 +17,9 @@ class ResourceDirctoryFile {
     var url: String? = null
     var type: Long = 0
     var size: String? = null
+    /**
+     * 视频重要度占比
+     */
     var percent: Float = 0f
     var courseId: Long = 0
     var chapterId: Long = 0
