@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class CourseClassServiceImpl:CourseClassService {
+class CourseClassServiceImpl : CourseClassService {
     override fun findAllByCourseIdAndClassId(courseId: Long, classId: Long): List<CourseClass> {
         return courseClassRepository.findByCourseIdAndClassId(courseId, classId)
     }
@@ -39,21 +39,21 @@ class CourseClassServiceImpl:CourseClassService {
     @Autowired
     private lateinit var courseClassRepository: CourseClassRepository
     @Autowired
-    private lateinit var studentCourseRepository:StudentCourseRepository
+    private lateinit var studentCourseRepository: StudentCourseRepository
     @Autowired
     private lateinit var studentCourseTargetRepository: StudentCourseTargetRepository
     @Autowired
     private lateinit var studentRepository: StudentRepository
     @Autowired
-    private lateinit var clazzRepository:ClazzRepository
+    private lateinit var clazzRepository: ClazzRepository
     @Autowired
-    private lateinit var courseRepository:CourseRepository
+    private lateinit var courseRepository: CourseRepository
     @Autowired
-    private lateinit var courseTargetRepository:CourseTargetRepository
+    private lateinit var courseTargetRepository: CourseTargetRepository
     @Autowired
     private lateinit var collegeTargetRepository: CollegeTargetRepository
     @Autowired
-    private lateinit var abilityRepository:RAbilityRepository
+    private lateinit var abilityRepository: RAbilityRepository
     @Autowired
     private lateinit var studentCollegeTargetRepository: StudentCollegeTargetRepository
     @Autowired
@@ -61,33 +61,34 @@ class CourseClassServiceImpl:CourseClassService {
 
     override fun getCourseMesg(teacherId: Long, courseId: Long): List<Map<String, List<StudentRecord>>> {
 
-        val classList=courseClassRepository.findByCourseIdAndTeacherId(courseId,teacherId)
-        var resultList= ArrayList<Map<String, List<StudentRecord>>>()
+        val classList = courseClassRepository.findByCourseIdAndTeacherId(courseId, teacherId)
+        var resultList = ArrayList<Map<String, List<StudentRecord>>>()
         classList.map {
 
             //it为每个班级,迭代每个班级，查出一个班的学生
-            var ids =clazzRepository.findById(it.classId).get()
-            var studentList=studentRepository.findByClassId(ids.id)
-            var classRecord=ArrayList<StudentRecord>()
+            var ids = clazzRepository.findById(it.classId).get()
+            var studentList = studentRepository.findByClassId(ids.id)
+            var classRecord = ArrayList<StudentRecord>()
 
             //迭代studentList，从studentCourse表中寻找该表记录，存入班级list
-            studentList.map { item->
+            studentList.map { item ->
 
                 //item为每个学生
-                val studentCourse=studentCourseRepository.findByCourseIdAndStudentId(courseId,item.studentNumber!!.toLong())
-                var sname=studentRepository.findByStudentNumber(item.studentNumber.toString())
+                val studentCourse =
+                    studentCourseRepository.findByCourseIdAndStudentId(courseId, item.studentNumber!!.toLong())
+                var sname = studentRepository.findByStudentNumber(item.studentNumber.toString())
 
-                if (studentCourse != null&&sname!=null) {
-                    var studentRecord=StudentRecord()
-                    studentRecord.name=sname.name!!
-                    studentRecord.studentCourse=studentCourse
+                if (studentCourse != null && sname != null) {
+                    var studentRecord = StudentRecord()
+                    studentRecord.name = sname.name!!
+                    studentRecord.studentCourse = studentCourse
                     classRecord.add(studentRecord)
                 }
             }
 
 
-            if (classRecord.size!=0){
-                var mapItem=HashMap<String, List<StudentRecord>>()
+            if (classRecord.size != 0) {
+                var mapItem = HashMap<String, List<StudentRecord>>()
                 mapItem[it.classId.toString()] = classRecord
                 resultList.add(mapItem)
             }
@@ -97,27 +98,27 @@ class CourseClassServiceImpl:CourseClassService {
     }
 
     override fun getStudentMesg(studentId: Long): PersonalRecord {
-        var student=studentRepository.findByStudentNumber(studentId.toString())!!
-        var ids =clazzRepository.findById(student.classId!!).get()
+        val student = studentRepository.findByStudentNumber(studentId.toString())!!
+        val ids = clazzRepository.findById(student.classId!!).get()
 
         println("student id $studentId, find student class ${student.classId},Course class ${ids.num}")
 
         //据sid查班级，据班级查课程list
-        var courseList= courseClassRepository.findByClassId(student.classId!!)
+        val courseList = courseClassRepository.findByClassId(student.classId!!)
 
         //记录课程达标的List
-        var coursePercentList=HashMap<String, PersonalCourse>()
+        val coursePercentList = HashMap<String, PersonalCourse>()
 
         //记录课程目标的list
-        var courseTargetPercentList=HashMap<String,List<PersonalCourseTarget>>()
+        val courseTargetPercentList = HashMap<String, List<PersonalCourseTarget>>()
 
         //记录专业目标的List
-        var collegeTargetList=ArrayList<PersonalCollegeTarget>()
+        var collegeTargetList = ArrayList<PersonalCollegeTarget>()
 
         //记录毕业目标的List
-        var abilityList=ArrayList<PersonalAbility>()
+        var abilityList = ArrayList<PersonalAbility>()
 
-        var personalRecord=PersonalRecord()
+        val personalRecord = PersonalRecord()
 
         //开始迭代
         courseList.map {
@@ -126,70 +127,69 @@ class CourseClassServiceImpl:CourseClassService {
              *  将记录加到存储课程目标的list中
              */
 
-            var courseTargetPercent=studentCourseTargetRepository.findByCourseIdAndStudentId(
-                    it.courseId,studentId
+            val courseTargetPercent = studentCourseTargetRepository.findByCourseIdAndStudentId(
+                it.courseId, studentId
             )
-            if (courseTargetPercent!=null){
-                var personalCourseTargetList=courseTargetPercent.map { mapItem->
-                    var personalCourseTarget=PersonalCourseTarget()
-                    personalCourseTarget.name=courseTargetRepository.findById(mapItem.courseTargetId).get().name
-                    personalCourseTarget.studentCourseTarget=mapItem
+            if (courseTargetPercent != null) {
+                val personalCourseTargetList = courseTargetPercent.map { mapItem ->
+                    val personalCourseTarget = PersonalCourseTarget()
+                    personalCourseTarget.name = courseTargetRepository.findById(mapItem.courseTargetId).get().name
+                    personalCourseTarget.studentCourseTarget = mapItem
                     return@map personalCourseTarget
                 }
-                courseTargetPercentList[it.classId.toString()]=personalCourseTargetList
+                courseTargetPercentList[it.classId.toString()] = personalCourseTargetList
             }
 
             /**
              *  课程达标记录
              */
 
-            var coursePercent=studentCourseRepository.findByCourseIdAndStudentId(it.courseId,studentId)
+            val coursePercent = studentCourseRepository.findByCourseIdAndStudentId(it.courseId, studentId)
             if (coursePercent != null) {
-                var personalCourse=PersonalCourse()
-                personalCourse.name=courseRepository.findById(it.courseId).get().name
-                personalCourse.studentCourse=coursePercent
+                val personalCourse = PersonalCourse()
+                personalCourse.name = courseRepository.findById(it.courseId).get().name
+                personalCourse.studentCourse = coursePercent
 
-                personalCourse.studentCourseTargetList=courseTargetPercentList
-                coursePercentList[it.courseId.toString()]=personalCourse
+                personalCourse.studentCourseTargetList = courseTargetPercentList
+                coursePercentList[it.courseId.toString()] = personalCourse
             }
-
 
 
         }
 
-        if (courseTargetPercentList.size!=0){
+        if (courseTargetPercentList.size != 0) {
             //专业目标达标记录，根据sid查即可
-            var temp=studentCollegeTargetRepository.findAllByStudentId(studentId)
-            if (temp!=null){
-                var list=temp.map { mapItem->
-                    var personalCollegeTarget=PersonalCollegeTarget()
-                    personalCollegeTarget.name=collegeTargetRepository.findById(mapItem.collegeTargetId).get().name
-                    personalCollegeTarget.studentCollegeTarget=mapItem
+            val temp = studentCollegeTargetRepository.findAllByStudentId(studentId)
+            if (temp != null) {
+                val list = temp.map { mapItem ->
+                    val personalCollegeTarget = PersonalCollegeTarget()
+                    personalCollegeTarget.name = collegeTargetRepository.findById(mapItem.collegeTargetId).get().name
+                    personalCollegeTarget.studentCollegeTarget = mapItem
                     return@map personalCollegeTarget
                 }
-                collegeTargetList= list as ArrayList<PersonalCollegeTarget>
+                collegeTargetList = list as ArrayList<PersonalCollegeTarget>
             }
 
             //毕业目标记录，据sid查询
-            var temp2=student12AbilityRepository.findByStudentId(studentId)
-            if (temp2!=null){
-                var list=temp2.map { mapItem->
-                    var personalAbility=PersonalAbility()
-                    personalAbility.name=abilityRepository.findById(mapItem.abilityId).get().name!!
-                    personalAbility.ability=mapItem
+            val temp2 = student12AbilityRepository.findByStudentId(studentId)
+            if (temp2 != null) {
+                val list = temp2.map { mapItem ->
+                    val personalAbility = PersonalAbility()
+                    personalAbility.name = abilityRepository.findById(mapItem.abilityId).get().name!!
+                    personalAbility.ability = mapItem
                     return@map personalAbility
                 }
-                abilityList= list as ArrayList<PersonalAbility>
+                abilityList = list as ArrayList<PersonalAbility>
             }
 
         }
 
 
-        personalRecord.classId=ids.num!!
-        personalRecord.name= student.name.toString()
-        personalRecord.studentAbilityList=abilityList
-        personalRecord.studentCollegeTargetList=collegeTargetList
-        personalRecord.studentCourseList=coursePercentList
+        personalRecord.classId = ids.num!!
+        personalRecord.name = student.name.toString()
+        personalRecord.studentAbilityList = abilityList
+        personalRecord.studentCollegeTargetList = collegeTargetList
+        personalRecord.studentCourseList = coursePercentList
         return personalRecord
 
     }

@@ -1,6 +1,5 @@
 package com.nuc.tracking.teacherend.po.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.sql.Timestamp
 import javax.persistence.*
 
@@ -18,11 +17,19 @@ class ResourceDirctoryFile {
     var url: String? = null
     var type: Long = 0
     var size: String? = null
+    /**
+     * 视频重要度占比
+     */
     var percent: Float = 0f
     var courseId: Long = 0
     var chapterId: Long = 0
     var knowledgeId: Long = 0
     var tq_percent: Float = 0f
     var playTimes: Int = 0
+
+    override fun toString(): String {
+        return "ResourceDirctoryFile(id=$id, name=$name, pid=$pid, addtime=$addtime, url=$url, type=$type, size=$size, percent=$percent, courseId=$courseId, chapterId=$chapterId, knowledgeId=$knowledgeId, tq_percent=$tq_percent, playTimes=$playTimes)"
+    }
+
 
 }

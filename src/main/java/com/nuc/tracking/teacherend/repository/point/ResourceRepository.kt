@@ -6,4 +6,11 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ResourceRepository : JpaRepository<ResourceDirctoryFile, Long> {
+
+    /**
+     * 获取名字相同的
+     * @param name String
+     * @return List<ResourceDirctoryFile>
+     */
+    fun findByNameLikeAndType(name: String, type: Long): List<ResourceDirctoryFile>
 }

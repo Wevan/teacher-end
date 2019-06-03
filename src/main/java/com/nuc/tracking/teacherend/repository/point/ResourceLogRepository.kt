@@ -6,4 +6,10 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ResourceLogRepository : JpaRepository<ResourceLog, Long> {
+
+    /**
+     * 通过id查找学生
+     * @param studentId Long
+     */
+    fun findByStudentId(studentId: Long): List<ResourceLog>
 }

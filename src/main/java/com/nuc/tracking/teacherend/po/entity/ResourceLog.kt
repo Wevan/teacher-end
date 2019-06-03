@@ -1,5 +1,6 @@
 package com.nuc.tracking.teacherend.po.entity
 
+import java.sql.Timestamp
 import javax.persistence.*
 
 /**
@@ -13,6 +14,12 @@ class ResourceLog {
     var id: Long = 0
     var studentId: Long = 0
     var resourceId: Long = 0
-    var time: Long = 0
-    var name: String ?= ""
+    lateinit var time: Timestamp
+    var name: String? = ""
+
+    override fun toString(): String {
+        return "ResourceLog(id=$id, studentId=$studentId, resourceId=$resourceId, time=$time, name=$name)"
+    }
+
+
 }
