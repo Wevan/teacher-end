@@ -107,17 +107,17 @@ class FileServiceImpl : FileService {
     }
 
     override fun findAll(courseId: Long, classId: Long): List<ResourceEntity>? {
-        var fileList = fileRepository.findByCourseId(courseId)
-        var resultList = ArrayList<ResourceEntity>()
-        fileList?.map {
-            var ent = resourceClassRepository.findByResourceIdAndClassId(it.id, classId)
-            var resourceEntity = ResourceEntity()
+        println("班级号 $courseId,classId:$classId")
+        val fileList = fileRepository.findByCourseId(courseId)
+        val resultList = ArrayList<ResourceEntity>()
+        fileList?.forEach {
+            val ent = resourceClassRepository.findByResourceIdAndClassId(it.id, classId)
+            val resourceEntity = ResourceEntity()
             if (ent !== null) {
                 resourceEntity.resourceClass = ent
             }
             resourceEntity.resourceDirctoryFile = it
             resultList.add(resourceEntity)
-            return@map
         }
 
         return resultList

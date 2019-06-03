@@ -15,11 +15,14 @@ interface CourseService {
     fun deleteById(id: Long)
 
     @Throws(ResultException::class)
-    fun findOne(id:Long): Course
+    fun findOne(id: Long): Course
 
     @Throws(ResultException::class)
-    fun findAll():List<Course>
+    fun findAll(): List<Course>
 
     @Throws(ResultException::class)
-    fun findByLevel(level:String):List<Course>
+    fun findByLevel(level: String): List<Course>
+
+    @Throws(ResultException::class)
+    fun findByCollegeId(collegeId: Long, direction: String): List<Course>
 }

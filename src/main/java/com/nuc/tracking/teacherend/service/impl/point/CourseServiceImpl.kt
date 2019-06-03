@@ -17,13 +17,22 @@ class CourseServiceImpl : CourseService {
     @Autowired
     private lateinit var courseRepository: CourseRepository
 
-    override fun findByLevel(level: String):List<Course> {
+    override fun findByCollegeId(collegeId: Long, direction: String): List<Course> {
+        var temp = courseRepository.findByCollegeIdAndDirection(collegeId, direction)
+        if (collegeId != 0L) {
+            val result = courseRepository.findByCollegeIdAndDirection(collegeId, "0")
+            temp.plus(result)
+        }
+        return temp
+    }
+
+    override fun findByLevel(level: String): List<Course> {
         val courseList: List<Course> = courseRepository.findCourseByLevel(level)!!
         return courseList
 
     }
 
-    override fun findAll() :List<Course>{
+    override fun findAll(): List<Course> {
         val courseList: List<Course> = courseRepository.findAll()
         return courseList
     }
@@ -36,7 +45,6 @@ class CourseServiceImpl : CourseService {
     override fun deleteById(id: Long) {
         courseRepository.deleteById(+id)
     }
-
 
 
     override fun save(course: Course) {

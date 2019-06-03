@@ -40,7 +40,7 @@ class StudentContoller {
      */
     @GetMapping("/graduate")
     fun getGraduate(studentNumber: Long): Result {
-        var graduate = studentGraduateService.findByStudentNumber(studentNumber)
+        val graduate = studentGraduateService.findByStudentNumber(studentNumber)
         return ResultUtils.success(200, "获取成功", graduate)
     }
 
@@ -50,10 +50,10 @@ class StudentContoller {
     @GetMapping("/studentPercentList")
     fun studentPercentList(courseId: Long, classId: Long): Result {
         println("Get Param courseId $courseId,classId $classId")
-        var studentList = ArrayList<StudentSelfPercent>()
-        var tempList = studentService.findAllByClassId(classId)
+        val studentList = ArrayList<StudentSelfPercent>()
+        val tempList = studentService.findAllByClassId(classId)
         tempList.forEach {
-            var studentSelfPercent = StudentSelfPercent()
+            val studentSelfPercent = StudentSelfPercent()
             studentSelfPercent.student = it
             // 此处的studentId为1713010101型
             val percent = studentCourseRepository.findByCourseIdAndStudentId(courseId, it.studentNumber!!.toLong())?.percent
