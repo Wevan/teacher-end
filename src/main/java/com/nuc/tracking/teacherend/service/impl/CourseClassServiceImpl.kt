@@ -75,15 +75,21 @@ class CourseClassServiceImpl : CourseClassService {
 
                 //item为每个学生
                 val studentCourse =
-                    studentCourseRepository.findByCourseIdAndStudentId(courseId, item.studentNumber!!.toLong())
+                        studentCourseRepository.findByCourseIdAndStudentId(courseId, item.studentNumber!!.toLong())
                 var sname = studentRepository.findByStudentNumber(item.studentNumber.toString())
 
-                if (studentCourse != null && sname != null) {
-                    var studentRecord = StudentRecord()
-                    studentRecord.name = sname.name!!
+                var studentRecord = StudentRecord()
+                studentRecord.name = sname!!.name!!
+                if (studentCourse != null) {
                     studentRecord.studentCourse = studentCourse
-                    classRecord.add(studentRecord)
+                } else {
+                    val temp = StudentCourse()
+                    temp.percent = 0f
+                    temp.courseId = courseId
+                    temp.studentId = sname.studentNumber!!.toLong()
+                    studentRecord.studentCourse = temp
                 }
+                classRecord.add(studentRecord)
             }
 
 
@@ -128,7 +134,7 @@ class CourseClassServiceImpl : CourseClassService {
              */
 
             val courseTargetPercent = studentCourseTargetRepository.findByCourseIdAndStudentId(
-                it.courseId, studentId
+                    it.courseId, studentId
             )
             if (courseTargetPercent != null) {
                 val personalCourseTargetList = courseTargetPercent.map { mapItem ->
