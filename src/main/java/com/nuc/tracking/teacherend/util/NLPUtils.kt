@@ -15,7 +15,7 @@ object NLPUtils {
      */
     init {
         // "C:\Users\young\Desktop\polyglot-zh.txt
-        wordVectorModel = WordVectorModel("C:/Users/young/Desktop/polyglot-zh.txt")
+        wordVectorModel = WordVectorModel("C:/Users/43886/Desktop/polyglot-zh.txt")
 
     }
 

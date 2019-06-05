@@ -6,13 +6,15 @@ import com.nuc.tracking.teacherend.util.ResultUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 /**
  * @author wevan 2019/6/3 9:47
  */
 
-@RestController("/recommend")
+@RestController
+@RequestMapping("/recommend")
 class RecommendController {
 
     @Autowired
